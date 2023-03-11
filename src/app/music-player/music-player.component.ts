@@ -5,6 +5,7 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
+  SimpleChange,
   SimpleChanges,
 } from '@angular/core';
 import WaveSurfer from 'wavesurfer.js/src/wavesurfer.js';
@@ -77,19 +78,23 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
     private _cdRef: ChangeDetectorRef
   ) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes?.tracks?.currentValue)
-      this._playlistService.playlist = changes?.tracks?.currentValue;
+  ngOnChanges(c: SimpleChanges): void {
+    const didTracksChange = this._didInputChange(c, 'tracks');
+    const didSelectedTrackChange = this._didInputChange(c, 'selectedTrack');
+    const didShowDarkModeChange = this._didInputChange(c, 'showDarkMode');
 
-    // if (changes?.showDarkMode?.currentValue)
-    //   this._wave?.setWaveColor(
-    //     changes?.showDarkMode?.currentValue ? '#4f5963' : '#e0e0e0'
-    //   );
+    if (didTracksChange)
+      this._playlistService.playlist = c['tracks']?.currentValue;
 
-    if (changes) {
+    if (didTracksChange || didSelectedTrackChange) {
       this._reloadTrack();
       this._reloadWave();
     }
+
+    if (didShowDarkModeChange)
+      this._wave?.setWaveColor(
+        c['showDarkMode']?.currentValue ? '#4f5963' : '#e0e0e0'
+      );
   }
 
   ngOnInit() {}
@@ -166,7 +171,11 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
 
   // Inits
   private _initWave(regions?: RegionParams[], markers?: MarkerParams[]): void {
-    this._wave = this._musicPlayerService.createWave(regions, markers);
+    this._wave = this._musicPlayerService.createWave(
+      regions,
+      markers,
+      this.showDarkMode
+    );
     this.iterableRegions = Object.values(this._wave.regions.list);
     this._initWaveEventHandlers();
   }
@@ -220,6 +229,13 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
     this.selectedTrack$.next(this.selectedTrack || this.tracks[0]);
     this.trackProgress$.next('0:00');
     this.trackImageUrl$.next(this.selectedTrack.cover);
+  }
+
+  private _didInputChange(c: SimpleChanges, inputName: string): boolean {
+    return (
+      c[inputName]?.firstChange ||
+      c[inputName]?.currentValue !== c[inputName]?.previousValue
+    );
   }
 
   ngOnDestroy() {

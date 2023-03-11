@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import WaveSurfer from 'wavesurfer.js/src/wavesurfer';
 import { Track } from '../interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class PlaylistService {
-  private _playlist: Track[] = [];
+  _playlist$: BehaviorSubject<Track[]> = new BehaviorSubject([]);
 
-  public get playlist(): Track[] {
-    return this._playlist;
+  get playlist(): Track[] {
+    return this._playlist$.value;
   }
 
-  public set playlist(playlist: Track[]) {
-    this._playlist = playlist;
+  set playlist(value: Track[]) {
+    this._playlist$.next(value);
   }
 
   constructor() {}

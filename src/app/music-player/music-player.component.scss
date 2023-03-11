@@ -91,6 +91,7 @@
 
     &__track {
       transition: all 600ms ease;
+      position: relative;
 
       .loader {
         position: absolute;
