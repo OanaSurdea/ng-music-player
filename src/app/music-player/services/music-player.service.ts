@@ -21,14 +21,13 @@ export class MusicPlayerService {
 
   public createWave(
     regions?: RegionParams[],
-    markers?: MarkerParams[],
-    showDarkMode?: boolean
+    markers?: MarkerParams[]
   ): WaveSurfer {
     return WaveSurfer.create({
       container: '#waveform',
 
       // Wave style
-      waveColor: showDarkMode ? '#4f5963' : '#e0e0e0',
+      waveColor: '#e0e0e0',
       progressColor: '#90CAF9',
       cursorColor: '#2196F3',
       barWidth: 2,

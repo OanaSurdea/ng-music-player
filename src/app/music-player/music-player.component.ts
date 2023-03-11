@@ -81,6 +81,11 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
     if (changes?.tracks?.currentValue)
       this._playlistService.playlist = changes?.tracks?.currentValue;
 
+    // if (changes?.showDarkMode?.currentValue)
+    //   this._wave?.setWaveColor(
+    //     changes?.showDarkMode?.currentValue ? '#4f5963' : '#e0e0e0'
+    //   );
+
     if (changes) {
       this._reloadTrack();
       this._reloadWave();
@@ -161,11 +166,7 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
 
   // Inits
   private _initWave(regions?: RegionParams[], markers?: MarkerParams[]): void {
-    this._wave = this._musicPlayerService.createWave(
-      regions,
-      markers,
-      this.showDarkMode
-    );
+    this._wave = this._musicPlayerService.createWave(regions, markers);
     this.iterableRegions = Object.values(this._wave.regions.list);
     this._initWaveEventHandlers();
   }
