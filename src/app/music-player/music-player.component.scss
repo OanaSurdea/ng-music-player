@@ -1,0 +1,217 @@
+::ng-deep {
+  .btn {
+    // background-color: #f2f8ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+
+    width: 2rem;
+    height: 2rem;
+    max-width: 2rem;
+
+    margin: 0 auto;
+  }
+}
+
+::ng-deep {
+  .music-player {
+    $self: &;
+
+    border-radius: 4px;
+    overflow: hidden;
+    background-color: #fff;
+    padding: 1rem;
+    height: auto;
+
+    transition: height 600ms ease;
+
+    &__cover {
+      display: block;
+      overflow: hidden;
+      border-radius: 4px;
+      object-fit: cover;
+
+      transition: all 600ms ease;
+
+      @media only screen and (min-width: 576px) {
+        height: 76px;
+        width: 76px;
+      }
+
+      @media only screen and (max-width: 575px) {
+        height: 152px;
+        width: 152px;
+        margin: 2rem auto;
+      }
+    }
+
+    &__title {
+      font-size: 0.95rem;
+
+      @media only screen and (min-width: 576px) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+
+        width: 110px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      @media only screen and (min-width: 620px) {
+        width: 135px;
+      }
+
+      @media only screen and (min-width: 992px) {
+        width: 210px;
+      }
+    }
+
+    &__controls {
+      display: flex;
+      text-align: center;
+
+      transition: all 600ms ease;
+
+      @media only screen and (min-width: 576px) {
+        align-items: center;
+        justify-content: space-between;
+        gap: 15px;
+        height: 76px;
+      }
+
+      @media only screen and (max-width: 575px) {
+        flex-direction: column;
+        gap: 20px;
+      }
+    }
+
+    &__track {
+      transition: all 600ms ease;
+
+      .loader {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      wave {
+        position: relative;
+        overflow: hidden;
+      }
+
+      @media only screen and (max-width: 767px) {
+        margin-top: 0.25rem;
+      }
+
+      @media only screen and (max-width: 575px) {
+        margin-top: 1rem;
+      }
+    }
+
+    &__control {
+      transition: all 600ms ease;
+
+      &--volume {
+        display: flex;
+        align-items: center;
+      }
+
+      .form-range {
+        width: calc(100% - 21px);
+        margin-left: 5px;
+
+        @media only screen and (min-width: 426px) {
+          min-width: 10px;
+          max-width: 60px;
+        }
+
+        @media only screen and (min-width: 992px) {
+          min-width: 10px;
+          max-width: 60px;
+        }
+
+        // @media only screen and (max-width: 992px) {
+        //   min-width: 10px;
+        //   max-width: 60px;
+        // }
+      }
+    }
+
+    &__button {
+      background-color: transparent;
+      transition: all 600ms ease;
+
+      .pi {
+        padding-top: 5px;
+
+        &.pi-play,
+        &.pi-pause {
+          padding-top: 0;
+        }
+
+        &.pi-play {
+          padding-left: 4px;
+        }
+      }
+
+      &--play {
+        @media only screen and (max-width: 575px) {
+          margin: 1rem auto 1.25rem;
+          height: 3.2rem;
+          width: 3.2rem;
+          max-width: 3.2rem;
+        }
+      }
+
+      &--resize {
+        transform: rotate(45deg);
+
+        .pi {
+          font-size: 0.65rem;
+          padding: 2px;
+        }
+      }
+    }
+
+    &__playlist {
+      transition: all 600ms ease;
+      height: auto;
+    }
+
+    &--small {
+      transition: all 600ms ease;
+
+      @media only screen and (min-width: 768px) {
+        padding: 0.25rem !important;
+        // height: 56px;
+        // overflow: hidden;
+
+        #{$self}__cover {
+          height: 46px;
+          width: 46px;
+        }
+
+        wave,
+        #{$self}__cover,
+        #{$self}__controls {
+          height: 46px !important;
+        }
+
+        #{$self}__playlist {
+          height: 0;
+          display: none;
+
+          .list-group-item {
+            font-size: 0.85rem;
+            padding: 0.25rem 0.5rem !important;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,88 @@
+<div class="row p-2">
+  <!-- Music Player -->
+  <div
+    class="music-player shadow-sm"
+    [class.music-player--small]="isMinimized$ | async"
+    [ngClass]="showDarkMode ? 'bg-dark' : 'bg-light'"
+  >
+    <div class="row align-items-center">
+      <!-- Track Cover & Title -->
+      <div class="col-12 col-sm-5 col-md-auto">
+        <div class="row align-items-center">
+          <div class="col-12 col-sm-auto">
+            <app-track-cover
+              [imageUrl]="trackImageUrl$ | async"
+            ></app-track-cover>
+          </div>
+
+          <div class="col-12 col-sm text-center text-sm-start ps-0 ps-md-1">
+            <app-track-title
+              [title]="selectedTrack$?.value?.title"
+              [artist]="selectedTrack$?.value?.artist"
+            ></app-track-title>
+          </div>
+        </div>
+      </div>
+
+      <!-- Music Controls -->
+      <div class="col-12 col-sm col-md-auto order-2 order-sm-1 pe-sm-2 pe-md-2">
+        <div class="music-player__controls">
+          <app-play-controls
+            [isPlaying]="isPlaying$ | async"
+            (onPlayPrevious)="handlePlayPrevious()"
+            (onPlayPauseChange)="handlePlayPauseChange()"
+            (onPlayNext)="handlePlayNext()"
+          ></app-play-controls>
+
+          <app-volume-controls
+            class="d-none d-sm-block ps-sm-2 ps-lg-4"
+            [isMuted]="isMuted$ | async"
+            [volume]="volume"
+            (onVolumeChange)="handleVolumeChange($event)"
+            (onIsMuteChange)="handleIsMuteChange()"
+          ></app-volume-controls>
+        </div>
+      </div>
+
+      <!-- Track Wave -->
+      <div class="col-12 col-sm-12 col-md order-1 order-sm-3">
+        <app-track
+          [currentTime]="trackProgress$ | async"
+          [duration]="trackDuration$ | async"
+          [isLoading]="isLoading$ | async"
+        ></app-track>
+      </div>
+
+      <div
+        class="col-auto order-2 order-sm-2 order-md-3 d-none d-md-block pe-sm-3"
+      >
+        <app-resize-button
+          [isMinimized]="isMinimized$ | async"
+          (onMinimize)="handleMinimizeChange()"
+        ></app-resize-button>
+      </div>
+    </div>
+
+    <!-- Playlist -->
+    <ng-container>
+      <div class="row">
+        <div class="col">
+          <app-playlist
+            [selectedTrack]="selectedTrack$ | async"
+            [tracks]="tracks$ | async"
+            (onTrackChange)="handleTrackChange($event)"
+          ></app-playlist>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<!-- Track section comments -->
+<ng-container *ngIf="showComments">
+  <app-waveform-comments
+    [regions]="iterableRegions"
+    [isPlaying]="isPlaying$ | async"
+    (onRegionCommentClick)="handleRegionCommentClick($event)"
+  ></app-waveform-comments>
+</ng-container>

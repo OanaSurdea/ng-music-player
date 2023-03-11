@@ -1,0 +1,44 @@
+<div class="row align-items-center justify-content-center">
+  <div class="col-auto">
+    <button
+      class="music-player__button border-0 text-muted"
+      type="button"
+      (click)="playPrevious()"
+      (keydown)="$event.preventDefault()"
+      title="Play Previous"
+    >
+      <i class="pi pi-step-backward-alt text-muted"></i>
+    </button>
+  </div>
+
+  <div class="col-auto px-4 px-sm-0">
+    <button
+      class="
+        music-player__button music-player__button--play
+        btn btn-primary-outline
+        shadow-sm
+        border-0
+        text-muted
+      "
+      type="button"
+      (click)="playPauseChange()"
+      (keydown)="$event.preventDefault()"
+      [title]="isPlaying ? 'Pause' : 'Play'"
+      [class.active]="isPlaying"
+    >
+      <i class="pi pi-{{ isPlaying ? 'pause' : 'play' }} text-muted"></i>
+    </button>
+  </div>
+
+  <div class="col-auto">
+    <button
+      class="music-player__button border-0 text-muted"
+      type="button"
+      (click)="playNext()"
+      (keydown)="$event.preventDefault()"
+      title="Play Next"
+    >
+      <i class="pi pi-step-forward-alt text-muted"></i>
+    </button>
+  </div>
+</div>

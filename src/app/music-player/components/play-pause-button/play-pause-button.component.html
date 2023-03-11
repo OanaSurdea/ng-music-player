@@ -1,0 +1,12 @@
+<div>
+  <button
+    class="music-player__button btn btn-primary-outline border text-muted"
+    type="button"
+    (click)="playPauseChange()"
+    (keydown)="$event.preventDefault()"
+    [title]="isPlaying ? 'Pause' : 'Play'"
+    [class.active]="isPlaying"
+  >
+    <i class="pi pi-{{ isPlaying ? 'pause' : 'play' }} text-muted"></i>
+  </button>
+</div>

@@ -1,0 +1,18 @@
+<div>
+  <button
+    class="
+      music-player__button music-player__button--resize
+      border-0
+      text-muted
+      mb-1
+    "
+    type="button"
+    (click)="toggleMinimize()"
+    title="Minimize"
+  >
+    <div class="row">
+      <i class="col-12 pi pi-arrow-{{ isMinimized ? 'up' : 'down' }}"></i>
+      <i class="col-12 pi pi-arrow-{{ isMinimized ? 'down' : 'up' }}"></i>
+    </div>
+  </button>
+</div>

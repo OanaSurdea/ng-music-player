@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <app-music-player
+    [tracks]="tracks"
+    [showComments]="true"
+    [showDarkMode]="showDarkMode$ | async"
+  ></app-music-player>
+
+  <div class="mt-3 d-flex justify-content-end me-2">
+    <div class="form-check form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        [ngModel]="showDarkMode$ | async"
+        (ngModelChange)="showDarkMode$.next(!showDarkMode$.value)"
+      />
+      <label class="form-check-label">Toggle dark mode</label>
+    </div>
+  </div>
+</div>

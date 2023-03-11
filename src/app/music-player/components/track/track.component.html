@@ -1,0 +1,17 @@
+<div class="music-player__track row align-items-center">
+  <div class="col-auto">
+    <app-track-time [time]="currentTime"></app-track-time>
+  </div>
+
+  <div class="col px-0">
+    <div class="loader" [hidden]="!isLoading">
+      <app-loader></app-loader>
+    </div>
+
+    <div id="waveform"></div>
+  </div>
+
+  <div class="col-auto ps-2">
+    <app-track-time [time]="duration"></app-track-time>
+  </div>
+</div>

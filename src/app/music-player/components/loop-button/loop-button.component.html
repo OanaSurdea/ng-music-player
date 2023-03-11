@@ -1,0 +1,11 @@
+<div>
+  <button
+    class="music-player__button btn btn-light-outline border pt-2 pb-1"
+    type="button"
+    (click)="isLoopingChange()"
+    [title]="isLooping ? 'Disable loop' : 'Enable loop'"
+    [class.active]="isLooping"
+  >
+    <i class="pi pi-replay"></i>
+  </button>
+</div>
