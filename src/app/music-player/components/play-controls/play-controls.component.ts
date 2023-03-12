@@ -24,19 +24,21 @@ export class PlayControlsComponent {
   @HostListener('document:keyup', ['$event']) onKeydownHandler(
     event: KeyboardEvent
   ) {
-    if (event.code === 'ArrowLeft' || event.code === 'ArrowUp') {
-      event.preventDefault();
-      return this.onPlayPrevious.emit();
-    }
+    switch (true) {
+      case event.code === 'ArrowLeft' || event.code === 'ArrowUp':
+        event.preventDefault();
+        this.onPlayPrevious.emit();
+        break;
 
-    if (event.code === 'Enter' || event.code === 'Space') {
-      event.preventDefault();
-      return this.onPlayPauseChange.emit();
-    }
+      case event.code === 'Enter' || event.code === 'Space':
+        event.preventDefault();
+        this.onPlayPauseChange.emit();
+        break;
 
-    if (event.code === 'ArrowRight' || event.code === 'ArrowDown') {
-      event.preventDefault();
-      return this.onPlayNext.emit();
+      case event.code === 'ArrowRight' || event.code === 'ArrowDown':
+        event.preventDefault();
+        this.onPlayNext.emit();
+        break;
     }
   }
 
