@@ -62,17 +62,13 @@
     </div>
 
     <!-- Playlist -->
-    <ng-container>
-      <div class="row">
-        <div class="col">
-          <app-playlist
-            [selectedTrack]="selectedTrack$ | async"
-            [tracks]="tracks$ | async"
-            (onTrackChange)="handleTrackChange($event)"
-          ></app-playlist>
-        </div>
-      </div>
-    </ng-container>
+    <div class="row col">
+      <app-playlist
+        [selectedTrack]="selectedTrack$ | async"
+        [tracks]="tracks$ | async"
+        (onTrackChange)="handleTrackChange($event)"
+      ></app-playlist>
+    </div>
   </div>
 </div>
 
