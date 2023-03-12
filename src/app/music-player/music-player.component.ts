@@ -59,7 +59,7 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   // Settings
   trackProgress$: BehaviorSubject<string> = new BehaviorSubject('0:00');
   trackDuration$: BehaviorSubject<string> = new BehaviorSubject('0:00');
-  volume: number = 0.15;
+  volume: number = 0.5;
 
   // Helpers
   isMuted$: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -188,6 +188,7 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
     // Progress events
     this._wave.on('ready', (e) => {
       this.trackDuration$.next(convertToSeconds(this._wave.getDuration()));
+      this._wave.setVolume(this.volume);
       this.isLoading$.next(false);
     });
 
@@ -196,11 +197,16 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
       this._cdRef.detectChanges();
     });
 
-    this._wave.on('seek', (e) =>
+    this._wave.on('seek', (e) => {
       this.trackProgress$.next(
         convertToSeconds((e *= this._wave.getDuration()))
-      )
-    );
+      );
+
+      console.log(this._wave);
+      console.log(this._wave.isPlaying());
+
+      console.log(this._wave.getVolume());
+    });
 
     this._wave.on('loading', (e) => this.isLoading$.next(true));
     this._wave.on('play', (e) => this.isPlaying$.next(true));
