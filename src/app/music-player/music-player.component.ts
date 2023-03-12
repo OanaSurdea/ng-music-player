@@ -57,7 +57,6 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   @Input() readonly showDarkMode: boolean = false;
 
   // Settings
-  trackImageUrl$: BehaviorSubject<string> = new BehaviorSubject('');
   trackProgress$: BehaviorSubject<string> = new BehaviorSubject('0:00');
   trackDuration$: BehaviorSubject<string> = new BehaviorSubject('0:00');
   volume: number = 0.15;
@@ -224,7 +223,6 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   private _reloadTrack(): void {
     this.selectedTrack$.next(this.selectedTrack || this.tracks[0]);
     this.trackProgress$.next('0:00');
-    this.trackImageUrl$.next(this.selectedTrack.cover);
   }
 
   private _didInputChange(c: SimpleChanges, inputName: string): boolean {

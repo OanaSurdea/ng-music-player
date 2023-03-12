@@ -11,7 +11,7 @@
       <div class="row align-items-center">
         <app-track-cover
           class="col-12 col-sm-auto"
-          [imageUrl]="trackImageUrl$ | async"
+          [imageUrl]="selectedTrack$?.value?.cover"
         ></app-track-cover>
 
         <app-track-title
