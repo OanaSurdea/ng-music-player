@@ -18,18 +18,20 @@
       [duration]="trackDuration$ | async"
       [isLoading]="!wave?.isReady"
     >
-      <app-play-controls
-        [isPlaying]="wave?.isPlaying()"
-        (onChange)="handlePlay($event)"
-      ></app-play-controls>
+      <div class="music-player__controls">
+        <app-play-controls
+          [isPlaying]="wave?.isPlaying()"
+          (onChange)="handlePlay($event)"
+        ></app-play-controls>
 
-      <app-volume-controls
-        class="d-none d-sm-block ps-sm-2 ps-lg-4"
-        [isMuted]="wave?.isMuted"
-        [volume]="volume"
-        (onVolumeChange)="handleVolumeChange($event)"
-        (onIsMuteChange)="handleIsMuteChange($event)"
-      ></app-volume-controls>
+        <app-volume-controls
+          class="d-none d-sm-block ps-sm-2 ps-lg-4"
+          [isMuted]="wave?.isMuted"
+          [volume]="volume"
+          (onVolumeChange)="handleVolumeChange($event)"
+          (onIsMuteChange)="handleIsMuteChange($event)"
+        ></app-volume-controls>
+      </div>
     </app-track>
 
     <app-resize-button

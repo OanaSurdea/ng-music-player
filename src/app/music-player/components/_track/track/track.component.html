@@ -1,5 +1,5 @@
 <div class="track row align-items-center">
-  <div class="col-12 col-sm-5 col-md-auto">
+  <div class="col-12 col-sm-6 col-md-auto">
     <div class="row align-items-center">
       <app-track-cover
         class="col-12 col-sm-auto"
@@ -14,23 +14,25 @@
     </div>
   </div>
 
-  <div class="col-12 col-sm col-md-auto pe-sm-2 pe-md-2 music-player__controls">
+  <div class="col-12 col-sm-6 col-md-auto pe-sm-2 pe-md-2">
     <ng-content></ng-content>
   </div>
 
-  <div class="col-auto">
-    <app-track-time [time]="currentTime"></app-track-time>
-  </div>
-
-  <div class="col px-0">
-    <div class="loader" [hidden]="!isLoading">
-      <app-loader></app-loader>
+  <div class="col row align-items-center">
+    <div class="col-auto">
+      <app-track-time [time]="currentTime"></app-track-time>
     </div>
 
-    <div id="waveform"></div>
-  </div>
+    <div class="col px-0">
+      <div class="loader" [hidden]="!isLoading">
+        <app-loader></app-loader>
+      </div>
 
-  <div class="col-auto ps-2">
-    <app-track-time [time]="duration"></app-track-time>
+      <div id="waveform"></div>
+    </div>
+
+    <div class="col-auto ps-2">
+      <app-track-time [time]="duration"></app-track-time>
+    </div>
   </div>
 </div>
