@@ -1,12 +1,14 @@
 <div class="music-player__playlist mt-3">
-  <ul class="list-group border-0">
+  <ol class="list-group border-0">
     <li
       *ngFor="let track of tracks; let i = index"
       class="list-group-item border-0 py-sm-2"
       [class.active]="track.id === selectedTrack.id"
+      [tabindex]="i + 1"
       (click)="trackChange(track)"
+      (focus)="trackChange(track)"
     >
-      <a href="#">{{ track?.title }}</a>
+      {{ track?.title }}
     </li>
-  </ul>
+  </ol>
 </div>
