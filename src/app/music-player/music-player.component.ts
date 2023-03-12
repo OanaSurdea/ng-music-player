@@ -62,15 +62,12 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   volume: number = 0.5;
 
   // Helpers
-  isMuted$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  isPlaying$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   isLooping$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  isLoading$: BehaviorSubject<boolean> = new BehaviorSubject(true);
   isMinimized$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   iterableRegions: Region[] = [];
 
   // WaveSurfer
-  private wave: WaveSurfer | null = null;
+  wave: WaveSurfer | null = null;
 
   constructor(
     private _musicPlayerService: MusicPlayerService,
@@ -100,11 +97,8 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   ngOnInit() {}
 
   // Child Events
-  handleIsMuteChange() {
-    if (this.wave) {
-      this.isMuted$.next(!this.isMuted$.value);
-      this.wave.setMute(this.isMuted$.value);
-    }
+  handleIsMuteChange(value: boolean) {
+    this.wave?.setMute(value);
   }
 
   handleIsLoopingChange() {
@@ -114,7 +108,7 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   handleVolumeChange(value: number) {
     if (this.wave && value) {
       this.volume = value <= 0 ? 0 : value;
-      this.isMuted$.next(this.volume <= 0);
+      this.wave.setMute(this.volume <= 0);
       this.wave.setVolume(this.volume);
     }
   }
@@ -189,7 +183,6 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
     this.wave.on('ready', (e) => {
       this.trackDuration$.next(convertToSeconds(this.wave.getDuration()));
       this.wave.setVolume(this.volume);
-      this.isLoading$.next(false);
     });
 
     this.wave.on('audioprocess', (e) => {
@@ -204,17 +197,12 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
 
       console.log(this.wave.isPlaying());
       console.log(this.wave.getVolume());
-      console.log(this.wave.isReady);
+      console.log(this.wave.isMuted);
     });
-
-    this.wave.on('loading', (e) => this.isLoading$.next(true));
-    this.wave.on('play', (e) => this.isPlaying$.next(true));
-    this.wave.on('pause', (e) => this.isPlaying$.next(false));
 
     this.wave?.on('finish', () => {
       if (this.isLooping$.value) return this.wave?.play();
 
-      this.isPlaying$.next(false);
       this._cdRef.detectChanges();
     });
   }

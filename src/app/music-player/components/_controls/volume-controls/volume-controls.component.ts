@@ -13,11 +13,11 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeControlsComponent {
-  @Input() readonly isMuted: boolean = false;
-  @Input() readonly volume: number = 0;
+  @Input() readonly isMuted: boolean;
+  @Input() readonly volume: number;
 
   @Output() readonly onVolumeChange: EventEmitter<number> = new EventEmitter();
-  @Output() readonly onIsMuteChange: EventEmitter<null> = new EventEmitter();
+  @Output() readonly onIsMuteChange: EventEmitter<boolean> = new EventEmitter();
 
   constructor() {}
 
@@ -27,6 +27,6 @@ export class VolumeControlsComponent {
   }
 
   isMuteChange() {
-    this.onIsMuteChange.emit();
+    this.onIsMuteChange.emit(!this.isMuted);
   }
 }
