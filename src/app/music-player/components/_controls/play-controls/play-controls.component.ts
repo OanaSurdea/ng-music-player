@@ -4,10 +4,9 @@ import {
   EventEmitter,
   HostListener,
   Input,
-  OnInit,
   Output,
 } from '@angular/core';
-import { PlayTypeEnum } from '../enums';
+import { PlayTypeEnum } from 'src/app/music-player/_types/enums';
 
 @Component({
   selector: 'app-play-controls',

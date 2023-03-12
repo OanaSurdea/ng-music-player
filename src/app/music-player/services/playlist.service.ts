@@ -1,7 +1,7 @@
 import { Injectable, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import WaveSurfer from 'wavesurfer.js/src/wavesurfer';
-import { Track } from '../interfaces';
+import { Track } from '../_types/interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class PlaylistService {

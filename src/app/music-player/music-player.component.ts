@@ -20,10 +20,10 @@ import {
 } from 'wavesurfer.js/src/plugin/markers';
 import { MusicPlayerService } from './services/music-player.service';
 import { convertToSeconds } from './helpers/convert-to-seconds.helper';
-import { Track } from './interfaces';
 import { PlaylistService } from './services/playlist.service';
 import { BehaviorSubject } from 'rxjs';
-import { PlayTypeEnum } from './components/enums';
+import { Track } from './_types/interfaces';
+import { PlayTypeEnum } from './_types/enums';
 
 @Component({
   selector: 'app-music-player',

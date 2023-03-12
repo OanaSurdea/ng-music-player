@@ -1,5 +1,5 @@
 import { getRandomColor } from './music-player/helpers';
-import { Track } from './music-player/interfaces';
+import { Track } from './music-player/_types/interfaces';
 
 export const TRACKS: Track[] = [
   {

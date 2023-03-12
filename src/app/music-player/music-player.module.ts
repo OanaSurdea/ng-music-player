@@ -1,19 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LoaderComponent } from './components/loader/loader.component';
-import { LoopButtonComponent } from './components/loop-button/loop-button.component';
-import { PlayButtonComponent } from './components/play-button/play-button.component';
-import { PlayControlsComponent } from './components/play-controls/play-controls.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
-import { ResizeButtonComponent } from './components/resize-button/resize-button.component';
-import { TrackCoverComponent } from './components/track-cover/track-cover.component';
-import { TrackTimeComponent } from './components/track-time/track-time.component';
-import { TrackTitleComponent } from './components/track-title/track-title.component';
-import { TrackComponent } from './components/track/track.component';
-import { VolumeControlsComponent } from './components/volume-controls/volume-controls.component';
 import { WaveformCommentsComponent } from './components/waveform-comments/waveform-comments.component';
-import { ZoomControlsComponent } from './components/zoom-controls/zoom-controls.component';
+
+import {
+  LoopButtonComponent,
+  PlayButtonComponent,
+  ResizeButtonComponent,
+} from './components/_buttons';
+
+import {
+  PlayControlsComponent,
+  VolumeControlsComponent,
+  ZoomControlsComponent,
+} from './components/_controls';
+
+import { LoaderComponent } from './components/_other';
+
+import {
+  TrackComponent,
+  TrackCoverComponent,
+  TrackTimeComponent,
+  TrackTitleComponent,
+} from './components/_track';
+
 import { MusicPlayerComponent } from './music-player.component';
 
 @NgModule({

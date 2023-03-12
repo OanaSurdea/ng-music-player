@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Track } from './music-player/interfaces';
+import { Track } from './music-player/_types/interfaces';
 import { TRACKS } from './tracks.data';
 
 @Component({

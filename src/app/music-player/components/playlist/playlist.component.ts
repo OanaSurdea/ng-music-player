@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Track } from '../../interfaces';
+import { Track } from '../../_types/interfaces';
 
 @Component({
   selector: 'app-playlist',
