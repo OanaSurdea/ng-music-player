@@ -40,6 +40,4 @@ export class PlayControlsComponent {
         break;
     }
   }
-
-  constructor() {}
 }
