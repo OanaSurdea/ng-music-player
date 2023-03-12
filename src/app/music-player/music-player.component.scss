@@ -65,17 +65,10 @@
 
       .form-range {
         width: calc(100% - 21px);
-        margin-left: 5px;
+        padding-left: 5px;
 
-        @media only screen and (min-width: 426px) {
-          min-width: 10px;
-          max-width: 60px;
-        }
-
-        @media only screen and (min-width: 992px) {
-          min-width: 10px;
-          max-width: 60px;
-        }
+        min-width: 10px;
+        max-width: 60px;
       }
     }
 
