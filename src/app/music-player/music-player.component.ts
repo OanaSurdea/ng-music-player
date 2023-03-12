@@ -194,15 +194,10 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
       this.trackProgress$.next(
         convertToSeconds((e *= this.wave.getDuration()))
       );
-
-      console.log(this.wave.isPlaying());
-      console.log(this.wave.getVolume());
-      console.log(this.wave.isMuted);
     });
 
     this.wave?.on('finish', () => {
       if (this.isLooping$.value) return this.wave?.play();
-
       this._cdRef.detectChanges();
     });
   }
