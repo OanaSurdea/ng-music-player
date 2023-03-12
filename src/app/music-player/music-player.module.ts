@@ -14,7 +14,6 @@ import {
 import {
   PlayControlsComponent,
   VolumeControlsComponent,
-  ZoomControlsComponent,
 } from './components/_controls';
 
 import { LoaderComponent } from './components/_other';
@@ -35,7 +34,6 @@ import { MusicPlayerComponent } from './music-player.component';
 
     // Controls
     MusicPlayerControlsComponent,
-    ZoomControlsComponent,
     VolumeControlsComponent,
     PlayControlsComponent,
     LoopButtonComponent,
