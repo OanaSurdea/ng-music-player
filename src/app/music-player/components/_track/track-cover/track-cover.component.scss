@@ -1,0 +1,18 @@
+.track__cover {
+  display: block;
+  border-radius: 4px;
+  object-fit: cover;
+
+  transition: all 600ms ease;
+
+  @media only screen and (min-width: 576px) {
+    height: 76px;
+    width: 76px;
+  }
+
+  @media only screen and (max-width: 575px) {
+    height: 152px;
+    width: 152px;
+    margin: 2rem auto;
+  }
+}
