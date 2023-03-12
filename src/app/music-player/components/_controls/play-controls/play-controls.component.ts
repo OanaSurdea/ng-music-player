@@ -23,21 +23,21 @@ export class PlayControlsComponent {
   @HostListener('document:keyup', ['$event']) onKeydownHandler(
     event: KeyboardEvent
   ) {
-    switch (event.code) {
-      case 'ArrowLeft':
-      case 'ArrowUp':
-        this.onChange.emit(PlayTypeEnum.PlayPrevious);
-        break;
-
-      case 'Enter':
-      case 'Space':
-        this.onChange.emit(PlayTypeEnum.PlayPause);
-        break;
-
-      case 'ArrowRight':
-      case 'ArrowDown':
-        this.onChange.emit(PlayTypeEnum.PlayNext);
-        break;
-    }
+    // event.stopPropagation();
+    // switch (event.code) {
+    //   case 'ArrowLeft':
+    //   case 'ArrowUp':
+    //     this.onChange.emit(PlayTypeEnum.PlayPrevious);
+    //     break;
+    //   case 'Enter':
+    //   case 'Space':
+    //     event.preventDefault();
+    //     this.onChange.emit(PlayTypeEnum.PlayPause);
+    //     break;
+    //   case 'ArrowRight':
+    //   case 'ArrowDown':
+    //     this.onChange.emit(PlayTypeEnum.PlayNext);
+    //     break;
+    // }
   }
 }
