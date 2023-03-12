@@ -16,8 +16,6 @@
 
     transition: height 600ms ease;
 
-
-
     &__controls {
       display: flex;
       text-align: center;
@@ -102,7 +100,7 @@
       @media only screen and (min-width: 768px) {
         padding: 0.25rem !important;
 
-        #{$self}__cover {
+        .track__cover {
           height: 46px;
           width: 46px;
         }
