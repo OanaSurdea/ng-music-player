@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { LoaderComponent } from './components/loader/loader.component';
 import { LoopButtonComponent } from './components/loop-button/loop-button.component';
 import { PlayControlsComponent } from './components/play-controls/play-controls.component';
-import { PlayPauseButtonComponent } from './components/play-pause-button/play-pause-button.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { ResizeButtonComponent } from './components/resize-button/resize-button.component';
 import { TrackCoverComponent } from './components/track-cover/track-cover.component';
@@ -24,7 +23,6 @@ import { MusicPlayerComponent } from './music-player.component';
     // Controls
     ZoomControlsComponent,
     VolumeControlsComponent,
-    PlayPauseButtonComponent,
     PlayControlsComponent,
     LoopButtonComponent,
 
