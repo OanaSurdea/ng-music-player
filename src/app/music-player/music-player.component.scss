@@ -55,31 +55,6 @@
       }
     }
 
-    &__track {
-      transition: all 600ms ease;
-      position: relative;
-
-      .loader {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      }
-
-      wave {
-        position: relative;
-        overflow: hidden;
-      }
-
-      @media only screen and (max-width: 767px) {
-        margin-top: 0.25rem;
-      }
-
-      @media only screen and (max-width: 575px) {
-        margin-top: 1rem;
-      }
-    }
-
     &__control {
       transition: all 600ms ease;
 
