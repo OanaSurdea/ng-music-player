@@ -153,7 +153,6 @@
           padding: 2px;
         }
       }
-
     }
 
     &__playlist {
@@ -166,8 +165,6 @@
 
       @media only screen and (min-width: 768px) {
         padding: 0.25rem !important;
-        // height: 56px;
-        // overflow: hidden;
 
         #{$self}__cover {
           height: 46px;
