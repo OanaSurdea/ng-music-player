@@ -7,20 +7,6 @@
   <!-- [ngClass]="showDarkMode ? 'bg-dark' : 'bg-light'" -->
   <div class="row align-items-center">
     <!-- Track Cover & Title -->
-    <div class="col-12 col-sm-5 col-md-auto">
-      <div class="row align-items-center">
-        <app-track-cover
-          class="col-12 col-sm-auto"
-          [imageUrl]="selectedTrack$?.value?.cover"
-        ></app-track-cover>
-
-        <app-track-title
-          class="col-12 col-sm text-center text-sm-start ps-0 ps-md-1"
-          [title]="selectedTrack$?.value?.title"
-          [artist]="selectedTrack$?.value?.artist"
-        ></app-track-title>
-      </div>
-    </div>
 
     <!-- Music Controls -->
     <div
@@ -43,6 +29,7 @@
     <!-- Track Wave -->
     <app-track
       class="col-12 col-sm-12 col-md"
+      [selectedTrack$]="selectedTrack$"
       [currentTime]="trackProgress$ | async"
       [duration]="trackDuration$ | async"
       [isLoading]="!wave?.isReady"

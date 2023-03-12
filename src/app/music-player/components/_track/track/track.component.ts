@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { Track } from '../../../_types/interfaces';
 
 @Component({
   selector: 'app-track',
@@ -7,9 +8,10 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./track.component.scss'],
 })
 export class TrackComponent implements OnInit {
+  @Input() selectedTrack$: BehaviorSubject<Track>;
   @Input() currentTime: string;
   @Input() duration: string;
-  @Input() isLoading: boolean = true;
+  @Input() isLoading: boolean;
 
   constructor() {}
 

@@ -48,12 +48,6 @@ export class MusicPlayerService {
 
       // Plugins
       plugins: [
-        // TimelinePlugin.create({
-        //   container: '#wave-timeline',
-        //   primaryFontColor: '#fff',
-        //   secondaryFontColor: '#000',
-        //   pxPerSec: 5,
-        // }),
         CursorPlugin.create({
           showTime: true,
           formatTimeCallback: (ms: number) => convertToSeconds(ms),
