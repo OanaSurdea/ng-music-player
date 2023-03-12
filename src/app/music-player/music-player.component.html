@@ -4,9 +4,8 @@
   [class.music-player--small]="isMinimized$ | async"
   [class.music-player--dark]="showDarkMode"
 >
-  <!-- [ngClass]="showDarkMode ? 'bg-dark' : 'bg-light'" -->
   <div class="row align-items-center">
-    <!-- Track Wave -->
+    <!-- Track -->
     <app-track
       class="col-12 col-sm-12 col-md"
       [selectedTrack$]="selectedTrack$"
@@ -14,7 +13,7 @@
       [duration]="trackDuration$ | async"
       [isLoading]="!wave?.isReady"
     >
-      <!-- Music Controls -->
+      <!-- Controls -->
       <div class="music-player__controls">
         <app-play-controls
           [isPlaying]="wave?.isPlaying()"

@@ -1,17 +1,11 @@
 ::ng-deep {
-  .btn {
-    // background-color: #f2f8ff;
-  }
-}
-
-::ng-deep {
   .music-player {
     $self: &;
 
     border-radius: 4px;
     overflow: hidden;
     background-color: #f8f9fa;
-    padding: 1rem;
+    padding: 0.75rem;
     height: auto;
 
     transition: height 600ms ease;
@@ -102,7 +96,7 @@
 
         .track__cover {
           height: 46px;
-          width: 46px;
+          width: 46px !important;
         }
 
         wave,
