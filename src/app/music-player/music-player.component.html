@@ -23,12 +23,7 @@
 
     <!-- Music Controls -->
     <div
-      class="
-        col-12 col-sm col-md-auto
-        order-2 order-sm-1
-        pe-sm-2 pe-md-2
-        music-player__controls
-      "
+      class="col-12 col-sm col-md-auto pe-sm-2 pe-md-2 music-player__controls"
     >
       <app-play-controls
         [isPlaying]="isPlaying$ | async"
@@ -46,14 +41,14 @@
 
     <!-- Track Wave -->
     <app-track
-      class="col-12 col-sm-12 col-md order-1 order-sm-3"
+      class="col-12 col-sm-12 col-md"
       [currentTime]="trackProgress$ | async"
       [duration]="trackDuration$ | async"
       [isLoading]="isLoading$ | async"
     ></app-track>
 
     <app-resize-button
-      class="col-auto order-2 order-sm-2 order-md-3 d-none d-md-block pe-sm-3"
+      class="col-auto d-none d-md-block pe-sm-3"
       [isMinimized]="isMinimized$ | async"
       (onMinimize)="handleMinimizeChange()"
     ></app-resize-button>
