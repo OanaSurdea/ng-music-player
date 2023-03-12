@@ -7,6 +7,7 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
+import { PlayTypeEnum } from '../enums';
 
 @Component({
   selector: 'app-play-controls',
@@ -16,10 +17,9 @@ import {
 })
 export class PlayControlsComponent {
   @Input() readonly isPlaying: boolean = false;
+  @Output() readonly onChange: EventEmitter<PlayTypeEnum> = new EventEmitter();
 
-  @Output() readonly onPlayPauseChange: EventEmitter<null> = new EventEmitter();
-  @Output() readonly onPlayPrevious: EventEmitter<null> = new EventEmitter();
-  @Output() readonly onPlayNext: EventEmitter<null> = new EventEmitter();
+  playTypeEnum: typeof PlayTypeEnum = PlayTypeEnum;
 
   @HostListener('document:keyup', ['$event']) onKeydownHandler(
     event: KeyboardEvent
@@ -27,32 +27,20 @@ export class PlayControlsComponent {
     switch (event.code) {
       case 'ArrowLeft':
       case 'ArrowUp':
-        this.onPlayPrevious.emit();
+        this.onChange.emit(PlayTypeEnum.PlayPrevious);
         break;
 
       case 'Enter':
       case 'Space':
-        this.onPlayPauseChange.emit();
+        this.onChange.emit(PlayTypeEnum.PlayPause);
         break;
 
       case 'ArrowRight':
       case 'ArrowDown':
-        this.onPlayNext.emit();
+        this.onChange.emit(PlayTypeEnum.PlayNext);
         break;
     }
   }
 
   constructor() {}
-
-  playPrevious() {
-    this.onPlayPrevious.emit();
-  }
-
-  playPauseChange() {
-    this.onPlayPauseChange.emit();
-  }
-
-  playNext() {
-    this.onPlayNext.emit();
-  }
 }

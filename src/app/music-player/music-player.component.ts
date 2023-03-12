@@ -23,6 +23,7 @@ import { convertToSeconds } from './helpers/convert-to-seconds.helper';
 import { Track } from './interfaces';
 import { PlaylistService } from './services/playlist.service';
 import { BehaviorSubject } from 'rxjs';
+import { PlayTypeEnum } from './components/enums';
 
 @Component({
   selector: 'app-music-player',
@@ -119,31 +120,26 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
     }
   }
 
-  handlePlayPrevious() {
-    const currentTrackIndex: number = this.tracks$
-      .getValue()
-      .indexOf(this.selectedTrack$.getValue());
-    const lastIndex: number = this.tracks$.value.length - 1;
-    const previousIndex: number = currentTrackIndex - 1;
-    const previousTrack: Track =
-      this.tracks$.value[previousIndex] || this.tracks$.value[lastIndex];
+  handlePlay(type: PlayTypeEnum) {
+    const tracks = this.tracks$.value;
+    const currentIdx = tracks.indexOf(this.selectedTrack$.value);
 
-    this.handleTrackChange(previousTrack);
-  }
+    switch (type) {
+      case PlayTypeEnum.PlayPrevious:
+        const lastIndex: number = tracks.length - 1;
+        const prevTrack: Track = tracks[currentIdx - 1] || tracks[lastIndex];
+        this.handleTrackChange(prevTrack);
+        break;
 
-  handlePlayPauseChange() {
-    this._wave?.playPause();
-  }
+      case PlayTypeEnum.PlayPause:
+        this._wave?.playPause();
+        break;
 
-  handlePlayNext() {
-    const currentTrackIndex: number = this.tracks$
-      .getValue()
-      .indexOf(this.selectedTrack$.getValue());
-    const nextIndex: number = currentTrackIndex + 1;
-    const nextTrack: Track =
-      this.tracks$.value[nextIndex] || this.tracks$.value[0];
-
-    this.handleTrackChange(nextTrack);
+      case PlayTypeEnum.PlayNext:
+        const nextTrack: Track = tracks[currentIdx + 1] || tracks[0];
+        this.handleTrackChange(nextTrack);
+        break;
+    }
   }
 
   handleTrackChange(track: Track) {
@@ -154,7 +150,7 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
     this._reloadTrack();
     this._reloadWave();
 
-    this._wave.on('ready', (e) => this.handlePlayPauseChange());
+    this._wave.on('ready', (e) => this.handlePlay(PlayTypeEnum.PlayPause));
   }
 
   handleMinimizeChange() {

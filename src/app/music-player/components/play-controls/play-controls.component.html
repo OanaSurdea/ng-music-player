@@ -3,7 +3,7 @@
     <button
       class="music-player__button border-0 text-muted"
       type="button"
-      (click)="playPrevious()"
+      (click)="onChange.emit(playTypeEnum.PlayPrevious)"
       (keydown)="$event.preventDefault()"
       title="Play Previous"
     >
@@ -21,7 +21,7 @@
         text-muted
       "
       type="button"
-      (click)="playPauseChange()"
+      (click)="onChange.emit(playTypeEnum.PlayPause)"
       (keydown)="$event.preventDefault()"
       [title]="isPlaying ? 'Pause' : 'Play'"
       [class.active]="isPlaying"
@@ -34,7 +34,7 @@
     <button
       class="music-player__button border-0 text-muted"
       type="button"
-      (click)="playNext()"
+      (click)="onChange.emit(playTypeEnum.PlayNext)"
       (keydown)="$event.preventDefault()"
       title="Play Next"
     >

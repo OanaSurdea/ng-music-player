@@ -29,9 +29,7 @@
         <div class="music-player__controls">
           <app-play-controls
             [isPlaying]="isPlaying$ | async"
-            (onPlayPrevious)="handlePlayPrevious()"
-            (onPlayPauseChange)="handlePlayPauseChange()"
-            (onPlayNext)="handlePlayNext()"
+            (onChange)="handlePlay($event)"
           ></app-play-controls>
 
           <app-volume-controls
