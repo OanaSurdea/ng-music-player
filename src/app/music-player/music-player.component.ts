@@ -181,7 +181,6 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
     });
 
     this.wave.on('audioprocess', (ms: number) => {
-      console.log(this.wave.getCurrentTime);
       this.trackProgress$.next(convertToSeconds(ms));
       this._cdRef.detectChanges();
     });

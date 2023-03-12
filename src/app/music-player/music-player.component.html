@@ -9,8 +9,14 @@
     <!-- Track Cover & Title -->
 
     <!-- Music Controls -->
-    <div
-      class="col-12 col-sm col-md-auto pe-sm-2 pe-md-2 music-player__controls"
+
+    <!-- Track Wave -->
+    <app-track
+      class="col-12 col-sm-12 col-md"
+      [selectedTrack$]="selectedTrack$"
+      [currentTime]="trackProgress$ | async"
+      [duration]="trackDuration$ | async"
+      [isLoading]="!wave?.isReady"
     >
       <app-play-controls
         [isPlaying]="wave?.isPlaying()"
@@ -24,16 +30,7 @@
         (onVolumeChange)="handleVolumeChange($event)"
         (onIsMuteChange)="handleIsMuteChange($event)"
       ></app-volume-controls>
-    </div>
-
-    <!-- Track Wave -->
-    <app-track
-      class="col-12 col-sm-12 col-md"
-      [selectedTrack$]="selectedTrack$"
-      [currentTime]="trackProgress$ | async"
-      [duration]="trackDuration$ | async"
-      [isLoading]="!wave?.isReady"
-    ></app-track>
+    </app-track>
 
     <app-resize-button
       class="col-auto d-none d-md-block pe-sm-3"
