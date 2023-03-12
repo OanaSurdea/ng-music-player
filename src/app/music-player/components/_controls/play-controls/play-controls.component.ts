@@ -6,7 +6,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { PlayTypeEnum } from 'src/app/music-player/_types/enums';
+import { PlayTypeEnum } from '../../../_types/enums';
 
 @Component({
   selector: 'app-play-controls',
