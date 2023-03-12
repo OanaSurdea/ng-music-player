@@ -7,6 +7,8 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class PlayButtonComponent implements OnInit {
   @Input() readonly title: string;
+  @Input() readonly icon: string;
+  @Input() readonly classes: string;
   @Output() readonly onClick: EventEmitter<null> = new EventEmitter();
 
   constructor() {}

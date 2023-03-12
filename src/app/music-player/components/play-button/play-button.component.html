@@ -1,8 +1,9 @@
 <button
-  class="music-player__button"
+  class="music-player__button border-0"
+  [ngClass]="classes"
   type="button"
   [title]="title"
   (click)="onClick.emit()"
 >
-  <i class="pi pi-step-forward-alt text-muted"></i>
+  <i class="pi pi-{{ icon }} text-muted"></i>
 </button>

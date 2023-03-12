@@ -1,44 +1,26 @@
 <div class="row align-items-center justify-content-center">
   <div class="col-auto">
-    <button
-      class="music-player__button border-0 text-muted"
-      type="button"
-      (click)="onChange.emit(playTypeEnum.PlayPrevious)"
-      (keydown)="$event.preventDefault()"
+    <app-play-button
       title="Play Previous"
-    >
-      <i class="pi pi-step-backward-alt text-muted"></i>
-    </button>
+      icon="step-backward-alt"
+      (click)="onChange.emit(playTypeEnum.PlayPrevious)"
+    ></app-play-button>
   </div>
 
   <div class="col-auto px-4 px-sm-0">
-    <button
-      class="
-        music-player__button music-player__button--play
-        btn btn-primary-outline
-        shadow-sm
-        border-0
-        text-muted
-      "
-      type="button"
+    <app-play-button
+      title="Play Next"
+      classes="music-player__button--play shadow-sm"
+      [icon]="isPlaying ? 'pause' : 'play'"
       (click)="onChange.emit(playTypeEnum.PlayPause)"
-      (keydown)="$event.preventDefault()"
-      [title]="isPlaying ? 'Pause' : 'Play'"
-      [class.active]="isPlaying"
-    >
-      <i class="pi pi-{{ isPlaying ? 'pause' : 'play' }} text-muted"></i>
-    </button>
+    ></app-play-button>
   </div>
 
   <div class="col-auto">
-    <button
-      class="music-player__button border-0 text-muted"
-      type="button"
+    <app-play-button
+      title="Play Pause"
+      icon="step-forward-alt"
       (click)="onChange.emit(playTypeEnum.PlayNext)"
-      (keydown)="$event.preventDefault()"
-      title="Play Next"
-    >
-      <i class="pi pi-step-forward-alt text-muted"></i>
-    </button>
+    ></app-play-button>
   </div>
 </div>
