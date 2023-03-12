@@ -1,9 +1,16 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 
 @Component({
   selector: 'app-volume-controls',
   templateUrl: './volume-controls.component.html',
   styleUrls: ['./volume-controls.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VolumeControlsComponent {
   @Input() readonly isMuted: boolean = false;
