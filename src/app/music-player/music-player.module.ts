@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MusicPlayerControlsComponent } from './components/music-player-controls/music-player-controls.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { WaveformCommentsComponent } from './components/waveform-comments/waveform-comments.component';
 
@@ -33,6 +34,7 @@ import { MusicPlayerComponent } from './music-player.component';
     MusicPlayerComponent,
 
     // Controls
+    MusicPlayerControlsComponent,
     ZoomControlsComponent,
     VolumeControlsComponent,
     PlayControlsComponent,
