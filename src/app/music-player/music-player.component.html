@@ -6,10 +6,6 @@
 >
   <!-- [ngClass]="showDarkMode ? 'bg-dark' : 'bg-light'" -->
   <div class="row align-items-center">
-    <!-- Track Cover & Title -->
-
-    <!-- Music Controls -->
-
     <!-- Track Wave -->
     <app-track
       class="col-12 col-sm-12 col-md"
@@ -18,6 +14,7 @@
       [duration]="trackDuration$ | async"
       [isLoading]="!wave?.isReady"
     >
+      <!-- Music Controls -->
       <div class="music-player__controls">
         <app-play-controls
           [isPlaying]="wave?.isPlaying()"

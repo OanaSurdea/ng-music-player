@@ -1,5 +1,6 @@
 <div class="track row align-items-center">
   <div class="col-12 col-sm-6 col-md-auto">
+    <!-- Track Cover & Title -->
     <div class="row align-items-center">
       <app-track-cover
         class="col-12 col-sm-auto"
@@ -14,10 +15,12 @@
     </div>
   </div>
 
+  <!-- Music Controls -->
   <div class="col-12 col-sm-6 col-md-auto pe-sm-2 pe-md-2">
     <ng-content></ng-content>
   </div>
 
+  <!-- Track Wave & Timestamps -->
   <div class="col row align-items-center">
     <div class="col-auto">
       <app-track-time [time]="currentTime"></app-track-time>
