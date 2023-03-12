@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { LoaderComponent } from './components/loader/loader.component';
 import { LoopButtonComponent } from './components/loop-button/loop-button.component';
+import { PlayButtonComponent } from './components/play-button/play-button.component';
 import { PlayControlsComponent } from './components/play-controls/play-controls.component';
 import { PlaylistComponent } from './components/playlist/playlist.component';
 import { ResizeButtonComponent } from './components/resize-button/resize-button.component';
@@ -39,6 +40,7 @@ import { MusicPlayerComponent } from './music-player.component';
     // Other
     LoaderComponent,
     ResizeButtonComponent,
+    PlayButtonComponent,
   ],
   exports: [MusicPlayerComponent],
 })
