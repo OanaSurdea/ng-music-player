@@ -10,7 +10,7 @@
 
     border-radius: 4px;
     overflow: hidden;
-    background-color: #fff;
+    background-color: #f8f9fa;
     padding: 1rem;
     height: auto;
 
@@ -158,6 +158,21 @@
     &__playlist {
       transition: all 600ms ease;
       height: auto;
+    }
+
+    &--dark {
+      background-color: #212529;
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6,
+      p,
+      li {
+        color: #f8f9fa;
+      }
     }
 
     &--small {

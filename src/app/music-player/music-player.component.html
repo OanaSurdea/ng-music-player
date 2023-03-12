@@ -2,8 +2,9 @@
 <div
   class="music-player shadow-sm"
   [class.music-player--small]="isMinimized$ | async"
-  [ngClass]="showDarkMode ? 'bg-dark' : 'bg-light'"
+  [class.music-player--dark]="showDarkMode"
 >
+  <!-- [ngClass]="showDarkMode ? 'bg-dark' : 'bg-light'" -->
   <div class="row align-items-center">
     <!-- Track Cover & Title -->
     <div class="col-12 col-sm-5 col-md-auto">
