@@ -70,7 +70,7 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   iterableRegions: Region[] = [];
 
   // WaveSurfer
-  private _wave: WaveSurfer | null = null;
+  private wave: WaveSurfer | null = null;
 
   constructor(
     private _musicPlayerService: MusicPlayerService,
@@ -92,7 +92,7 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     if (didShowDarkModeChange)
-      this._wave?.setWaveColor(
+      this.wave?.setWaveColor(
         c['showDarkMode']?.currentValue ? '#4f5963' : '#e0e0e0'
       );
   }
@@ -101,21 +101,21 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
 
   // Child Events
   handleIsMuteChange() {
-    if (this._wave) {
+    if (this.wave) {
       this.isMuted$.next(!this.isMuted$.value);
-      this._wave.setMute(this.isMuted$.value);
+      this.wave.setMute(this.isMuted$.value);
     }
   }
 
   handleIsLoopingChange() {
-    if (this._wave) this.isLooping$.next(!this.isLooping$.value);
+    if (this.wave) this.isLooping$.next(!this.isLooping$.value);
   }
 
   handleVolumeChange(value: number) {
-    if (this._wave && value) {
+    if (this.wave && value) {
       this.volume = value <= 0 ? 0 : value;
       this.isMuted$.next(this.volume <= 0);
-      this._wave.setVolume(this.volume);
+      this.wave.setVolume(this.volume);
     }
   }
 
@@ -131,7 +131,7 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
         break;
 
       case PlayTypeEnum.PlayPause:
-        this._wave?.playPause();
+        this.wave?.playPause();
         break;
 
       case PlayTypeEnum.PlayNext:
@@ -142,78 +142,77 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   handleTrackChange(track: Track) {
-    if (!this._wave || !track) return;
+    if (!this.wave || !track) return;
 
     this.selectedTrack$.next(track);
 
     this._reloadTrack();
     this._reloadWave();
 
-    this._wave.on('ready', (e) => this.handlePlay(PlayTypeEnum.PlayPause));
+    this.wave.on('ready', (e) => this.handlePlay(PlayTypeEnum.PlayPause));
   }
 
   handleMinimizeChange() {
     this.isMinimized$.next(!this.isMinimized$.value);
-    setTimeout(() => this._wave?.drawBuffer(), 400);
+    setTimeout(() => this.wave?.drawBuffer(), 400);
   }
 
   handleRegionCommentClick(region: Region) {
-    if (this._wave) {
+    if (this.wave) {
       region.attributes.active = 'true';
-      this._wave.play(region.start, region.end);
+      this.wave.play(region.start, region.end);
     }
   }
 
   // Inits
   private _initWave(regions?: RegionParams[], markers?: MarkerParams[]): void {
-    this._wave = this._musicPlayerService.createWave(
+    this.wave = this._musicPlayerService.createWave(
       regions,
       markers,
       this.showDarkMode
     );
-    this.iterableRegions = Object.values(this._wave.regions.list);
+    this.iterableRegions = Object.values(this.wave.regions.list);
     this._initWaveEventHandlers();
   }
 
   private _initWaveEventHandlers(): void {
     // Region Events
-    this._wave?.on('region-click', (region: Region) => region.play());
+    this.wave?.on('region-click', (region: Region) => region.play());
 
-    this._wave?.on('region-click', (region: Region, event: Event) => {
+    this.wave?.on('region-click', (region: Region, event: Event) => {
       event.stopPropagation();
       region.attributes.active = 'true';
       region.play();
     });
 
     // Progress events
-    this._wave.on('ready', (e) => {
-      this.trackDuration$.next(convertToSeconds(this._wave.getDuration()));
-      this._wave.setVolume(this.volume);
+    this.wave.on('ready', (e) => {
+      this.trackDuration$.next(convertToSeconds(this.wave.getDuration()));
+      this.wave.setVolume(this.volume);
       this.isLoading$.next(false);
     });
 
-    this._wave.on('audioprocess', (e) => {
+    this.wave.on('audioprocess', (e) => {
       this.trackProgress$.next(convertToSeconds(e));
       this._cdRef.detectChanges();
     });
 
-    this._wave.on('seek', (e) => {
+    this.wave.on('seek', (e) => {
       this.trackProgress$.next(
-        convertToSeconds((e *= this._wave.getDuration()))
+        convertToSeconds((e *= this.wave.getDuration()))
       );
 
-      console.log(this._wave);
-      console.log(this._wave.isPlaying());
-
-      console.log(this._wave.getVolume());
+      console.log(this.wave.isPlaying());
+      console.log(this.wave.getVolume());
+      console.log(this.wave.isReady);
     });
 
-    this._wave.on('loading', (e) => this.isLoading$.next(true));
-    this._wave.on('play', (e) => this.isPlaying$.next(true));
-    this._wave.on('pause', (e) => this.isPlaying$.next(false));
+    this.wave.on('loading', (e) => this.isLoading$.next(true));
+    this.wave.on('play', (e) => this.isPlaying$.next(true));
+    this.wave.on('pause', (e) => this.isPlaying$.next(false));
 
-    this._wave?.on('finish', () => {
-      if (this.isLooping$.value) return this._wave?.play();
+    this.wave?.on('finish', () => {
+      if (this.isLooping$.value) return this.wave?.play();
 
       this.isPlaying$.next(false);
       this._cdRef.detectChanges();
@@ -221,9 +220,9 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   private _reloadWave(): void {
-    this._wave?.destroy();
+    this.wave?.destroy();
     this._initWave(this.selectedTrack.regions, this.selectedTrack.markers);
-    this._wave?.load(this.selectedTrack.url);
+    this.wave?.load(this.selectedTrack.url);
   }
 
   private _reloadTrack(): void {
@@ -239,6 +238,6 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this._wave?.destroy();
+    this.wave?.destroy();
   }
 }
