@@ -62,7 +62,6 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   volume: number = 0.5;
 
   // Helpers
-  isLooping$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   isMinimized$: BehaviorSubject<boolean> = new BehaviorSubject(false);
   iterableRegions: Region[] = [];
 
@@ -99,10 +98,6 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   // Child Events
   handleIsMuteChange(value: boolean) {
     this.wave?.setMute(value);
-  }
-
-  handleIsLoopingChange() {
-    if (this.wave) this.isLooping$.next(!this.isLooping$.value);
   }
 
   handleVolumeChange(value: number) {
@@ -194,11 +189,6 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
       this.trackProgress$.next(
         convertToSeconds((e *= this.wave.getDuration()))
       );
-    });
-
-    this.wave?.on('finish', () => {
-      if (this.isLooping$.value) return this.wave?.play();
-      this._cdRef.detectChanges();
     });
   }
 
