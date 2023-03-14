@@ -5,7 +5,7 @@
     border-radius: 4px;
     overflow: hidden;
     background-color: #f8f9fa;
-    padding: 0.75rem;
+    padding: 0.5rem;
     height: auto;
 
     transition: height 600ms ease;
@@ -92,28 +92,18 @@
       transition: all 600ms ease;
 
       @media only screen and (min-width: 768px) {
-        padding: 0.25rem !important;
+        // padding: 0.25rem !important;
 
-        .track__cover {
-          height: 46px;
-          width: 46px !important;
-        }
+        // .track__cover {
+        //   height: 46px;
+        //   width: 46px !important;
+        // }
 
-        wave,
-        .track__cover,
-        #{$self}__controls {
-          height: 46px !important;
-        }
-
-        .playlist {
-          height: 0;
-          display: none;
-
-          .list-group-item {
-            font-size: 0.85rem;
-            padding: 0.25rem 0.5rem !important;
-          }
-        }
+        // wave,
+        // .track__cover,
+        // #{$self}__controls {
+        //   height: 46px !important;
+        // }
       }
     }
   }

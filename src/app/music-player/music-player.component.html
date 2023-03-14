@@ -38,12 +38,14 @@
   </div>
 
   <!-- Playlist -->
-  <app-playlist
-    class="row col"
-    [selectedTrack]="selectedTrack$ | async"
-    [tracks]="tracks$ | async"
-    (onTrackChange)="handleTrackChange($event)"
-  ></app-playlist>
+  <ng-container *ngIf="!(isMinimized$ | async)">
+    <app-playlist
+      class="row col"
+      [selectedTrack]="selectedTrack$ | async"
+      [tracks]="tracks$ | async"
+      (onTrackChange)="handleTrackChange($event)"
+    ></app-playlist>
+  </ng-container>
 </div>
 
 <!-- Track section comments -->
