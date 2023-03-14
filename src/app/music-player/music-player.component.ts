@@ -62,7 +62,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.isMinimized$
+    this.showDarkMode$
       .pipe(
         distinctUntilChanged(),
         takeUntil(this.destroy$)
@@ -70,7 +70,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
       .subscribe((value: boolean) => this.wave?.setWaveColor(value ? '#4f5963' : '#e0e0e0')
       );
 
-    this.showDarkMode$
+    this.isMinimized$
       .pipe(
         distinctUntilChanged(),
         takeUntil(this.destroy$)
