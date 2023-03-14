@@ -2,21 +2,17 @@ import {
   ChangeDetectorRef,
   Component,
   Input,
-  OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChange,
   SimpleChanges,
 } from '@angular/core';
 import WaveSurfer from 'wavesurfer.js/src/wavesurfer.js';
 import {
   Region,
   RegionParams,
-  RegionsPluginParams,
 } from 'wavesurfer.js/src/plugin/regions';
 import {
   MarkerParams,
-  MarkersPluginParams,
 } from 'wavesurfer.js/src/plugin/markers';
 import { MusicPlayerService } from './services/music-player.service';
 import { convertToSeconds } from './helpers/convert-to-seconds.helper';
