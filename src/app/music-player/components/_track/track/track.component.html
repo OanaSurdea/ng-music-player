@@ -21,21 +21,23 @@
   </div>
 
   <!-- Track Wave & Timestamps -->
-  <div class="col row align-items-center order-1 order-sm-2">
-    <div class="col-auto">
-      <app-track-time [time]="currentTime"></app-track-time>
-    </div>
-
-    <div class="track__wave col px-0">
-      <div class="loader" [hidden]="!isLoading">
-        <app-loader></app-loader>
+  <div class="track__wave-details col order-1 order-sm-2">
+    <div class="row align-items-center">
+      <div class="col-auto">
+        <app-track-time [time]="currentTime"></app-track-time>
       </div>
 
-      <div id="waveform"></div>
-    </div>
+      <div class="track__wave col px-0">
+        <div class="loader" [hidden]="!isLoading">
+          <app-loader></app-loader>
+        </div>
 
-    <div class="col-auto ps-2">
-      <app-track-time [time]="duration"></app-track-time>
+        <div id="waveform"></div>
+      </div>
+
+      <div class="col-auto ps-2">
+        <app-track-time [time]="duration"></app-track-time>
+      </div>
     </div>
   </div>
 </div>
