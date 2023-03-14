@@ -25,6 +25,17 @@ import { BehaviorSubject } from 'rxjs';
 import { Track } from './_types/interfaces';
 import { PlayTypeEnum } from './_types/enums';
 
+import { trigger, transition, style, animate } from '@angular/animations';
+export const fadeInOut = trigger('fadeInOut', [
+  transition(':enter', [
+    style({ opacity: 0 }),
+    animate('300ms ease-in-out', style({ opacity: 1 }))
+  ]),
+  transition(':leave', [
+    animate('300ms ease-in-out', style({ opacity: 0 }))
+  ])
+]);
+
 @Component({
   selector: 'app-music-player',
   templateUrl: './music-player.component.html',
