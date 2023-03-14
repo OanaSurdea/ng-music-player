@@ -4,7 +4,7 @@
   [class.music-player--small]="isMinimized$ | async"
   [class.music-player--dark]="showDarkMode"
 >
-  <div class="row align-items-center">
+  <div class="music-player__row row align-items-center">
     <!-- Track -->
     <app-track
       class="col-12 col-sm-12 col-md"
@@ -39,12 +39,14 @@
 
   <!-- Playlist -->
   <ng-container *ngIf="!(isMinimized$ | async)">
-    <app-playlist
-      class="row col"
-      [selectedTrack]="selectedTrack$ | async"
-      [tracks]="tracks$ | async"
-      (onTrackChange)="handleTrackChange($event)"
-    ></app-playlist>
+    <div class="music-player__row music-player__row--last row">
+      <app-playlist
+        class="col-12"
+        [selectedTrack]="selectedTrack$ | async"
+        [tracks]="tracks$ | async"
+        (onTrackChange)="handleTrackChange($event)"
+      ></app-playlist>
+    </div>
   </ng-container>
 </div>
 

@@ -5,10 +5,17 @@
     border-radius: 4px;
     overflow: hidden;
     background-color: #f8f9fa;
-    padding: 0.5rem;
     height: auto;
 
     transition: height 600ms ease;
+
+    &__row {
+      padding: 0.75rem;
+
+      &--last {
+        padding-top: 0;
+      }
+    }
 
     &__controls {
       display: flex;
@@ -89,19 +96,22 @@
     }
 
     &--small {
-      transition: all 600ms ease;
-
       @media only screen and (min-width: 768px) {
-        // padding: 0.25rem !important;
+        #{$self}__row {
+          transition: all 200ms ease-in-out;
+          padding: 0.5rem;
+        }
 
-        // .track__cover {
-        //   height: 46px;
-        //   width: 46px !important;
-        // }
+        .track__cover {
+          height: 56px !important;
+          width: 56px !important;
+        }
 
         // wave,
         // .track__cover,
         // #{$self}__controls {
+        //   transition: all 600ms ease-in-out;
+        //   height: 46px !important;
         //   height: 46px !important;
         // }
       }
