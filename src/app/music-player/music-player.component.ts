@@ -21,7 +21,7 @@ import {
 import { MusicPlayerService } from './services/music-player.service';
 import { convertToSeconds } from './helpers/convert-to-seconds.helper';
 import { PlaylistService } from './services/playlist.service';
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil, distinctUntilChanged } from 'rxjs';
 import { Track } from './_types/interfaces';
 import { PlayTypeEnum } from './_types/enums';
 import { fadeAnimation } from '../shared/animations';
@@ -32,26 +32,19 @@ import { fadeAnimation } from '../shared/animations';
   styleUrls: ['./music-player.component.scss'],
   animations: [fadeAnimation],
 })
-export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
+export class MusicPlayerComponent implements OnInit, OnDestroy {
   // Selected Track
-  selectedTrack$: BehaviorSubject<Track | null> = new BehaviorSubject(null);
-
-  get selectedTrack(): Track | null {
-    return this.selectedTrack$.getValue();
-  }
-
-  @Input() set selectedTrack(value: Track) {
-    this.selectedTrack$.next(value);
-  }
+  @Input() selectedTrack$: BehaviorSubject<Track | null> = new BehaviorSubject(null);
+  @Input() set selectedTrack(v: Track | null) {this.selectedTrack$.next(v); }
 
   @Input() tracks$: BehaviorSubject<Track[]> = new BehaviorSubject(null);
-  @Input() set tracks(value: Track[]) { this.tracks$.next(value); }
+  @Input() set tracks(v: Track[]) {this.tracks$.next(v); }
 
   @Input() showComments$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  @Input() set showComments(value: boolean) { this.showComments$.next(value); }
+  @Input() set showComments(v: boolean) {this.showComments$.next(v); }
 
   @Input() showDarkMode$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  @Input() set showDarkMode(value: boolean) { this.showDarkMode$.next(value); }
+  @Input() set showDarkMode(v: boolean) {this.showDarkMode$.next(v); }
 
   // Settings
   trackProgress$: BehaviorSubject<string> = new BehaviorSubject('0:00');
@@ -73,29 +66,49 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
     private _cdRef: ChangeDetectorRef
   ) {}
 
-  ngOnChanges(c: SimpleChanges): void {
-    const didTracksChange = this._didInputChange(c, 'tracks');
-    const didSelectedTrackChange = this._didInputChange(c, 'selectedTrack');
-    const didShowDarkModeChange = this._didInputChange(c, 'showDarkMode');
-
-    if (didTracksChange)
-      this._playlistService.playlist = c['tracks']?.currentValue;
-
-    if (didTracksChange || didSelectedTrackChange) {
-      this._reloadTrack();
-      this._reloadWave();
-    }
-
-    if (didShowDarkModeChange)
-      this.wave?.setWaveColor(
-        c['showDarkMode']?.currentValue ? '#4f5963' : '#e0e0e0'
-      );
-  }
-
   ngOnInit() {
     this.isMinimized$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((value: boolean) => this.wave.setHeight(46));
+      .pipe(
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((value: boolean) => this.wave
+        ?.setWaveColor(value ? '#4f5963' : '#e0e0e0')
+      );
+
+    this.showDarkMode$
+      .pipe(
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((_value: boolean) => this.wave.setHeight(46));
+
+    this.tracks$
+      .pipe(
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(
+        (tracks: Track[]) => {
+          this._playlistService.playlist = tracks;
+          console.log('tracks', tracks);
+          this._reloadTrack();
+          this._reloadWave();
+        }
+      );
+
+    this.selectedTrack$
+      .pipe(
+        distinctUntilChanged(),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(
+        (selectedTrack: Track) => {
+          console.log('selectedTrack', selectedTrack);
+          this._reloadTrack();
+          this._reloadWave();
+        }
+      );
   }
 
   // Child Events
@@ -196,13 +209,17 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   private _reloadWave(): void {
+    const selectedTrack: Track | null = this.selectedTrack$.value;
+
+    if(selectedTrack === null) return;
+
     this.wave?.destroy();
-    this._initWave(this.selectedTrack.regions, this.selectedTrack.markers);
-    this.wave?.load(this.selectedTrack.url);
+    this._initWave(selectedTrack.regions, selectedTrack.markers);
+    this.wave?.load(selectedTrack.url);
   }
 
   private _reloadTrack(): void {
-    this.selectedTrack$.next(this.selectedTrack || this.tracks$.value[0]);
+    this.selectedTrack$.next(this.selectedTrack);
     this.trackProgress$.next('0:00');
   }
 
