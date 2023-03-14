@@ -7,7 +7,7 @@
     background-color: #f8f9fa;
     height: auto;
 
-    transition: height 600ms ease;
+    transition: height 300ms ease;
 
     &__row {
       padding: 0.75rem;
@@ -21,13 +21,12 @@
       display: flex;
       text-align: center;
 
-      transition: all 600ms ease;
+      transition: all 300ms ease;
 
       @media only screen and (min-width: 576px) {
         align-items: center;
         justify-content: space-between;
         gap: 15px;
-        height: 56px;
       }
 
       @media only screen and (max-width: 575px) {
@@ -37,7 +36,7 @@
     }
 
     &__control {
-      transition: all 600ms ease;
+      transition: all 300ms ease;
 
       &--volume {
         display: flex;
@@ -56,7 +55,7 @@
     &__button {
       background-color: transparent;
       padding-top: 5px;
-      transition: all 600ms ease;
+      transition: all 300ms ease;
 
       &--play {
         border-radius: 100%;
@@ -98,13 +97,13 @@
     &--small {
       @media only screen and (min-width: 768px) {
         #{$self}__row {
-          transition: all 200ms ease-in-out;
+          transition: all 300ms ease-in-out;
           padding: 0.5rem;
         }
 
         .track__cover {
-          height: 56px !important;
-          width: 56px !important;
+          height:50px !important;
+          width:50px !important;
         }
       }
     }

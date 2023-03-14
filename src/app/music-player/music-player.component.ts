@@ -21,25 +21,16 @@ import {
 import { MusicPlayerService } from './services/music-player.service';
 import { convertToSeconds } from './helpers/convert-to-seconds.helper';
 import { PlaylistService } from './services/playlist.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
 import { Track } from './_types/interfaces';
 import { PlayTypeEnum } from './_types/enums';
-
-import { trigger, transition, style, animate } from '@angular/animations';
-export const fadeInOut = trigger('fadeInOut', [
-  transition(':enter', [
-    style({ opacity: 0 }),
-    animate('300ms ease-in-out', style({ opacity: 1 }))
-  ]),
-  transition(':leave', [
-    animate('300ms ease-in-out', style({ opacity: 0 }))
-  ])
-]);
+import { fadeAnimation } from '../shared/animations';
 
 @Component({
   selector: 'app-music-player',
   templateUrl: './music-player.component.html',
   styleUrls: ['./music-player.component.scss'],
+  animations: [fadeAnimation],
 })
 export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   // Selected Track
@@ -79,6 +70,8 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   // WaveSurfer
   wave: WaveSurfer | null = null;
 
+  private destroy$: Subject<void> = new Subject<void>();
+
   constructor(
     private _musicPlayerService: MusicPlayerService,
     private _playlistService: PlaylistService,
@@ -104,7 +97,11 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
       );
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.isMinimized$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value: boolean) => this.wave.setHeight(46));
+  }
 
   // Child Events
   handleIsMuteChange(value: boolean) {
@@ -223,5 +220,7 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.wave?.destroy();
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }
