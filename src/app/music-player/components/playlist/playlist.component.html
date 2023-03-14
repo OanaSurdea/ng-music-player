@@ -5,7 +5,6 @@
       class="list-group-item border-0 py-sm-2"
       [class.active]="track.id === selectedTrack.id"
       [tabindex]="i + 1"
-      (click)="trackChange(track)"
       (focus)="trackChange(track)"
     >
       {{ track?.title }}
