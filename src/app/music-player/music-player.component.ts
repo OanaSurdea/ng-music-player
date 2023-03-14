@@ -61,7 +61,7 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   // Settings
   trackProgress$: BehaviorSubject<string> = new BehaviorSubject('0:00');
   trackDuration$: BehaviorSubject<string> = new BehaviorSubject('0:00');
-  volume: number = 0.5;
+  volume$: BehaviorSubject<number> = new BehaviorSubject(0.5);
 
   // Helpers
   isMinimized$: BehaviorSubject<boolean> = new BehaviorSubject(false);
@@ -110,9 +110,9 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
 
   handleVolumeChange(value: number) {
     if (this.wave && value) {
-      this.volume = value <= 0 ? 0 : value;
-      this.wave.setMute(this.volume <= 0);
-      this.wave.setVolume(this.volume);
+      this.volume$.next(value <= 0 ? 0 : value);
+      this.wave.setMute(this.volume$.value <= 0);
+      this.wave.setVolume(this.volume$.value);
     }
   }
 
@@ -185,7 +185,7 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
     // Progress events
     this.wave.on('ready', (e) => {
       this.trackDuration$.next(convertToSeconds(this.wave.getDuration()));
-      this.wave.setVolume(this.volume);
+      this.wave.setVolume(this.volume$.value);
     });
 
     this.wave.on('audioprocess', (ms: number) => {
