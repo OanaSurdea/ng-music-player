@@ -37,7 +37,7 @@ export class MusicPlayerService {
       cursorWidth: 0,
       responsive: true,
       hideScrollbar: true,
-      height: 76,
+      height: 56,
       // backend: 'MediaElement',
       pixelRatio: 4,
       splitChannels: false,
