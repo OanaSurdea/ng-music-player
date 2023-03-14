@@ -30,17 +30,17 @@ import { fadeAnimation } from '../shared/animations';
 })
 export class MusicPlayerComponent implements OnInit, OnDestroy {
   // Selected Track
-  @Input() selectedTrack$: BehaviorSubject<Track | null> = new BehaviorSubject(null);
-  @Input() set selectedTrack(v: Track | null) {this.selectedTrack$.next(v); }
-
   @Input() tracks$: BehaviorSubject<Track[]> = new BehaviorSubject(null);
-  @Input() set tracks(v: Track[]) {this.tracks$.next(v); }
+  @Input() set tracks(v: Track[]) { this.tracks$.next(v); }
+
+  @Input() selectedTrack$: BehaviorSubject<Track | null> = new BehaviorSubject(null);
+  @Input() set selectedTrack(v: Track | null) { this.selectedTrack$.next(v); }
 
   @Input() showComments$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  @Input() set showComments(v: boolean) {this.showComments$.next(v); }
+  @Input() set showComments(v: boolean) { this.showComments$.next(v); }
 
   @Input() showDarkMode$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  @Input() set showDarkMode(v: boolean) {this.showDarkMode$.next(v); }
+  @Input() set showDarkMode(v: boolean) { this.showDarkMode$.next(v); }
 
   // Settings
   trackProgress$: BehaviorSubject<string> = new BehaviorSubject('0:00');
@@ -68,8 +68,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
         distinctUntilChanged(),
         takeUntil(this.destroy$)
       )
-      .subscribe((value: boolean) => this.wave
-        ?.setWaveColor(value ? '#4f5963' : '#e0e0e0')
+      .subscribe((value: boolean) => this.wave?.setWaveColor(value ? '#4f5963' : '#e0e0e0')
       );
 
     this.showDarkMode$
@@ -77,7 +76,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
         distinctUntilChanged(),
         takeUntil(this.destroy$)
       )
-      .subscribe((_value: boolean) => this.wave.setHeight(46));
+      .subscribe((_value: boolean) => this.wave?.setHeight(46));
 
     this.tracks$
       .pipe(
@@ -88,8 +87,10 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
         (tracks: Track[]) => {
           this._playlistService.playlist = tracks;
           console.log('tracks', tracks);
-          this._reloadTrack();
-          this._reloadWave();
+          if(this.tracks?.length > 0) {
+            this._reloadTrack();
+            this._reloadWave();
+          }
         }
       );
 
@@ -101,8 +102,10 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
       .subscribe(
         (selectedTrack: Track) => {
           console.log('selectedTrack', selectedTrack);
-          this._reloadTrack();
-          this._reloadWave();
+          if(selectedTrack) {
+            this._reloadTrack();
+            this._reloadWave();
+          }
         }
       );
   }
@@ -121,25 +124,25 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   }
 
   handlePlay(type: PlayTypeEnum) {
-    const tracks = this.tracks$.value;
-    const currentIdx = tracks.indexOf(this.selectedTrack$.value);
+    // const tracks = this.tracks$.value;
+    // const currentIdx = tracks.indexOf(this.selectedTrack$.value);
 
-    switch (type) {
-      case PlayTypeEnum.PlayPrevious:
-        const lastIndex: number = tracks.length - 1;
-        const prevTrack: Track = tracks[currentIdx - 1] || tracks[lastIndex];
-        this.handleTrackChange(prevTrack);
-        break;
+    // switch (type) {
+    //   case PlayTypeEnum.PlayPrevious:
+    //     const lastIndex: number = tracks.length - 1;
+    //     const prevTrack: Track = tracks[currentIdx - 1] || tracks[lastIndex];
+    //     this.handleTrackChange(prevTrack);
+    //     break;
 
-      case PlayTypeEnum.PlayPause:
-        this.wave?.playPause();
-        break;
+    //   case PlayTypeEnum.PlayPause:
+    //     this.wave?.playPause();
+    //     break;
 
-      case PlayTypeEnum.PlayNext:
-        const nextTrack: Track = tracks[currentIdx + 1] || tracks[0];
-        this.handleTrackChange(nextTrack);
-        break;
-    }
+    //   case PlayTypeEnum.PlayNext:
+    //     const nextTrack: Track = tracks[currentIdx + 1] || tracks[0];
+    //     this.handleTrackChange(nextTrack);
+    //     break;
+    // }
   }
 
   handleTrackChange(track: Track) {
@@ -172,7 +175,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
       markers,
       this.showDarkMode$.value
     );
-    this.iterableRegions = Object.values(this.wave.regions.list);
+    this.iterableRegions = Object.values(this.wave?.regions?.list);
     this._initWaveEventHandlers();
   }
 
@@ -207,7 +210,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   private _reloadWave(): void {
     const selectedTrack: Track | null = this.selectedTrack$.value;
 
-    if(selectedTrack === null) return;
+    if(!selectedTrack) return;
 
     this.wave?.destroy();
     this._initWave(selectedTrack.regions, selectedTrack.markers);

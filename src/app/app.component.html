@@ -1,7 +1,7 @@
 <div class="m-1">
   <app-music-player
     [tracks]="tracks"
-    [selectedTrack]="tracks[0]"
+    [selectedTrack$]="selectedTrack$"
     [showComments]="true"
     [showDarkMode]="showDarkMode$ | async"
   ></app-music-player>
