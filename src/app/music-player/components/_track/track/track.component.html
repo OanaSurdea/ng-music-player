@@ -4,13 +4,13 @@
     <div class="row align-items-center">
       <app-track-cover
         class="col-12 col-sm-auto"
-        [imageUrl]="selectedTrack$?.value?.cover"
+        [imageUrl]="(selectedTrack$ | async)?.cover"
       ></app-track-cover>
 
       <app-track-title
         class="col-12 col-sm text-center text-sm-start ps-0 ps-md-1"
-        [title]="selectedTrack$?.value?.title"
-        [artist]="selectedTrack$?.value?.artist"
+        [title]="(selectedTrack$ | async)?.title"
+        [artist]="(selectedTrack$ | async)?.artist"
       ></app-track-title>
     </div>
   </div>
