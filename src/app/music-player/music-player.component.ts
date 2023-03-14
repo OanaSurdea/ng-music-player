@@ -44,19 +44,14 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
     this.selectedTrack$.next(value);
   }
 
-  tracks$: BehaviorSubject<Track[]> = new BehaviorSubject(null);
+  @Input() tracks$: BehaviorSubject<Track[]> = new BehaviorSubject(null);
+  @Input() set tracks(value: Track[]) { this.tracks$.next(value); }
 
-  // Tracks
-  get tracks(): Track[] {
-    return this.tracks$.getValue();
-  }
+  @Input() showComments$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  @Input() set showComments(value: boolean) { this.showComments$.next(value); }
 
-  @Input() set tracks(value: Track[]) {
-    this.tracks$.next(value);
-  }
-
-  @Input() readonly showComments: boolean = true;
-  @Input() readonly showDarkMode: boolean = false;
+  @Input() showDarkMode$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  @Input() set showDarkMode(value: boolean) { this.showDarkMode$.next(value); }
 
   // Settings
   trackProgress$: BehaviorSubject<string> = new BehaviorSubject('0:00');
@@ -166,7 +161,7 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
     this.wave = this._musicPlayerService.createWave(
       regions,
       markers,
-      this.showDarkMode
+      this.showDarkMode$.value
     );
     this.iterableRegions = Object.values(this.wave.regions.list);
     this._initWaveEventHandlers();
@@ -207,7 +202,7 @@ export class MusicPlayerComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   private _reloadTrack(): void {
-    this.selectedTrack$.next(this.selectedTrack || this.tracks[0]);
+    this.selectedTrack$.next(this.selectedTrack || this.tracks$.value[0]);
     this.trackProgress$.next('0:00');
   }
 

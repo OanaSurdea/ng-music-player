@@ -2,7 +2,7 @@
 <div
   class="music-player shadow-sm"
   [class.music-player--small]="isMinimized$ | async"
-  [class.music-player--dark]="showDarkMode"
+  [class.music-player--dark]="showDarkMode$ | async"
 >
   <div class="music-player__row row align-items-center">
     <!-- Track -->
@@ -51,7 +51,7 @@
 </div>
 
 <!-- Track section comments -->
-<ng-container *ngIf="showComments">
+<ng-container *ngIf="showComments$ | async">
   <app-waveform-comments
     [regions]="iterableRegions"
     [isPlaying]="wave?.isPlaying()"
