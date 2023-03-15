@@ -10,7 +10,7 @@ import { TRACKS } from './tracks.data';
 })
 export class AppComponent implements OnInit {
   public tracks: Track[] = TRACKS;
-  public cards: any[] = [1, 2, 3];
+  public cards: any[] = ['#f3ad5e', '#f3ad5e', '#f3ad5e'];
   showDarkMode$: BehaviorSubject<boolean> = new BehaviorSubject(true);
 
   constructor(private renderer: Renderer2) {}
