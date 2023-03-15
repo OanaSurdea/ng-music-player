@@ -4,8 +4,9 @@
 
     border-radius: 4px;
     overflow: hidden;
+    color: #000;
     background-color: #f8f9fa;
-    transition: height 300ms ease;
+    transition: height 300ms ease, background-color 300ms ease;
 
     &__row {
       padding: 0.75rem;
