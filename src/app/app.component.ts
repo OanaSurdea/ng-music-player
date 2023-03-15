@@ -10,6 +10,5 @@ import { TRACKS } from './tracks.data';
 })
 export class AppComponent {
   public tracks: Track[] = TRACKS;
-  selectedTrack$: BehaviorSubject<Track> = new BehaviorSubject(this.tracks[0]);
   showDarkMode$: BehaviorSubject<boolean> = new BehaviorSubject(true);
 }
