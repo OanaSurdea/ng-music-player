@@ -10,7 +10,7 @@
   <div class="col-auto px-4 px-sm-0">
     <app-play-button
       title="Play Next"
-      classes="music-player__button--play shadow-sm"
+      classes="btn btn--play"
       [icon]="isPlaying ? 'pause' : 'play'"
       (click)="onChange.emit(playTypeEnum.PlayPause)"
     ></app-play-button>

@@ -1,0 +1,11 @@
+.btn {
+  &--resize {
+    transform: rotate(45deg) !important;
+
+    .pi {
+      font-size: 0.6rem;
+      font-weight: 600;
+      padding: 2px;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-<div class="m-1">
+<div class="app">
   <app-music-player
     [tracks]="tracks"
     [showComments]="true"
@@ -13,7 +13,18 @@
         [ngModel]="showDarkMode$ | async"
         (ngModelChange)="showDarkMode$.next(!showDarkMode$.value)"
       />
-      <label class="form-check-label">Toggle dark mode</label>
+      <label
+        class="form-check-label"
+        [ngClass]="(showDarkMode$ | async) ? 'text-light' : 'text-dark'"
+      >
+        Toggle dark mode
+      </label>
+    </div>
+  </div>
+
+  <div class="row ms-5">
+    <div class="col my-5" *ngFor="let card of cards">
+      <div class="card my-5 py-5 bg-primary"></div>
     </div>
   </div>
 </div>
