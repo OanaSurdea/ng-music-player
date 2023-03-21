@@ -53,7 +53,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
   // WaveSurfer
   wave: WaveSurfer | null = null;
 
-  private destroy$: Subject<void> = new Subject<void>();
+  private _destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private _musicPlayerService: MusicPlayerService,
@@ -65,7 +65,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     this.showDarkMode$
       .pipe(
         distinctUntilChanged(),
-        takeUntil(this.destroy$)
+        takeUntil(this._destroy$)
       )
       .subscribe((value: boolean) => this.wave?.setWaveColor(value ? '#4f5963' : '#e0e0e0')
       );
@@ -73,14 +73,14 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     this.isMinimized$
       .pipe(
         distinctUntilChanged(),
-        takeUntil(this.destroy$)
+        takeUntil(this._destroy$)
       )
       .subscribe((_value: boolean) => this.wave?.setHeight(46));
 
     this.tracks$
       .pipe(
         distinctUntilChanged(),
-        takeUntil(this.destroy$)
+        takeUntil(this._destroy$)
       )
       .subscribe(
         (tracks: Track[]) => {
@@ -94,7 +94,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     this.selectedTrack$
       .pipe(
         distinctUntilChanged(),
-        takeUntil(this.destroy$)
+        takeUntil(this._destroy$)
       )
       .subscribe(
         (_selectedTrack: Track) => {
@@ -227,7 +227,7 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.wave?.destroy();
-    this.destroy$.next();
-    this.destroy$.complete();
+    this._destroy$.next();
+    this._destroy$.complete();
   }
 }
