@@ -13,10 +13,10 @@ import MarkersPlugin, {
 import WaveSurfer = require('wavesurfer.js');
 import { convertToSeconds } from '../helpers';
 
-var ctx = document.createElement('canvas').getContext('2d');
-var linGrad = ctx.createLinearGradient(0, 0, 1000, 128);
-linGrad.addColorStop(0, '#aaa');
-linGrad.addColorStop(1, '#4f5963'); 
+// var ctx = document.createElement('canvas').getContext('2d');
+// var linGrad = ctx.createLinearGradient(0, 0, 1000, 128);
+// linGrad.addColorStop(0, '#aaa');
+// linGrad.addColorStop(1, '#4f5963'); 
 // '#4f5963',
 // '#e0e0e0'
 
@@ -35,7 +35,7 @@ export class MusicPlayerService {
       container: '#waveform',
 
       // Wave style
-      waveColor: linGrad,
+      waveColor: showDarkMode ? '#999' : '#4f5963',
       progressColor: '#90CAF9',
       cursorColor: '#2196F3',
       barWidth: 2,
