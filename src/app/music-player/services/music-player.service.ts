@@ -13,13 +13,6 @@ import MarkersPlugin, {
 import WaveSurfer = require('wavesurfer.js');
 import { convertToSeconds } from '../helpers';
 
-// var ctx = document.createElement('canvas').getContext('2d');
-// var linGrad = ctx.createLinearGradient(0, 0, 1000, 128);
-// linGrad.addColorStop(0, '#aaa');
-// linGrad.addColorStop(1, '#4f5963'); 
-// '#4f5963',
-// '#e0e0e0'
-
 @Injectable({ providedIn: 'root' })
 export class MusicPlayerService {
   public wave: WaveSurfer | null = null;
@@ -46,7 +39,7 @@ export class MusicPlayerService {
       hideScrollbar: true,
       height: 56,
       // backend: 'MediaElement',
-      pixelRatio: 4,
+      pixelRatio: 10,
       splitChannels: false,
       closeAudioContext: true,
       // barHeight: 1.5,
