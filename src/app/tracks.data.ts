@@ -69,7 +69,7 @@ export const TRACKS: Track[] = [
     id: 2,
     title: 'Pink Panther Theme Song',
     artist: 'T. Schürger',
-    url: 'https://soundboardguy.com/wp-content/uploads/2022/07/the-pink-panther-theme-song-original-version.mp3',
+    url: 'gs://ng-music-player-d4ce5.appspot.com/the-pink-panther-theme-song.mp3',
     cover: 'https://i1.sndcdn.com/artworks-000193575970-i2owe2-t500x500.jpg',
   },
   {
