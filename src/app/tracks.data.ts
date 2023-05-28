@@ -67,13 +67,20 @@ export const TRACKS: Track[] = [
   },
   {
     id: 2,
+    title: 'Pink Panther Theme Song',
+    artist: 'T. Schürger',
+    url: 'https://soundboardguy.com/wp-content/uploads/2022/07/the-pink-panther-theme-song-original-version.mp3',
+    cover: 'https://i1.sndcdn.com/artworks-000193575970-i2owe2-t500x500.jpg',
+  },
+  {
+    id: 3,
     title: 'Random Track Mashup',
     artist: 'T. Schürger',
     url: 'https://wavesurfer-js.org/example/media/stereo.mp3',
     cover: 'https://f4.bcbits.com/img/a1723011251_10.jpg',
   },
   {
-    id: 3,
+    id: 4,
     title: 'Random Guitar',
     artist: 'T. Schürger',
     url: 'https://wavesurfer-js.org/example/media/demo.wav',
