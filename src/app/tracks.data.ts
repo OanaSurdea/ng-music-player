@@ -69,7 +69,7 @@ export const TRACKS: Track[] = [
     id: 2,
     title: 'Pink Panther Theme Song',
     artist: 'T. Schürger',
-    url: 'gs://ng-music-player-d4ce5.appspot.com/the-pink-panther-theme-song.mp3',
+    url: 'https://firebasestorage.googleapis.com/v0/b/ng-music-player-d4ce5.appspot.com/o/the-pink-panther-theme-song.mp3?alt=media&token=8e7fc080-3eaf-467f-a6b4-34fd7a96298b',
     cover: 'https://i1.sndcdn.com/artworks-000193575970-i2owe2-t500x500.jpg',
   },
   {
