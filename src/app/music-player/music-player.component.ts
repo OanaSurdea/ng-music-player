@@ -30,16 +30,16 @@ import { fadeAnimation } from '../shared/animations';
 })
 export class MusicPlayerComponent implements OnInit, OnDestroy {
   // Selected Track
-  @Input() tracks$: BehaviorSubject<Track[]> = new BehaviorSubject(null);
-  @Input() set tracks(v: Track[]) { this.tracks$.next(v); }
-
+  tracks$: BehaviorSubject<Track[]> = new BehaviorSubject(null);
   selectedTrack$: BehaviorSubject<Track | null> = new BehaviorSubject(null);
 
-  @Input() showComments$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  @Input() set showComments(v: boolean) { this.showComments$.next(v); }
-
-  @Input() showDarkMode$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  @Input() set showDarkMode(v: boolean) { this.showDarkMode$.next(v); }
+  showComments$: BehaviorSubject<boolean> = new BehaviorSubject(true);
+  showDarkMode$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  
+  @Input() set tracks(value: Track[]) { this.tracks$.next(value); }
+  @Input() set selectedTrack(value: Track) { this.selectedTrack$.next(value); }
+  @Input() set showComments(value: boolean) { this.showComments$.next(value); }
+  @Input() set showDarkMode(value: boolean) { this.showDarkMode$.next(value); }
 
   // Settings
   trackProgress$: BehaviorSubject<string> = new BehaviorSubject('0:00');
