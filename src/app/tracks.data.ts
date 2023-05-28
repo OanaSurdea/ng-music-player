@@ -4,6 +4,13 @@ import { Track } from './music-player/_types/interfaces';
 export const TRACKS: Track[] = [
   {
     id: 1,
+    title: 'Pink Panther Theme Song',
+    artist: 'Henry Mancini and His Orchestra',
+    url: 'https://ia904503.us.archive.org/23/items/lp_music-from-the-pink-panther-and-other-hits_living-guitars/disc1/01.01.%20The%20Pink%20Panther%20Theme.mp3',
+    cover: 'https://ia800109.us.archive.org/BookReader/BookReaderImages.php?zip=/0/items/cd_the-pink-panther-and-other-hits_henry-mancini-and-his-orchestra/cd_the-pink-panther-and-other-hits_henry-mancini-and-his-orchestra_jp2.zip&file=cd_the-pink-panther-and-other-hits_henry-mancini-and-his-orchestra_jp2/cd_the-pink-panther-and-other-hits_henry-mancini-and-his-orchestra_0000.jp2&id=cd_the-pink-panther-and-other-hits_henry-mancini-and-his-orchestra',
+  },
+  {
+    id: 2,
     title: 'Godfather Theme 1',
     artist: 'Nino Rota',
     url: 'https://ia800508.us.archive.org/15/items/LoveThemeFromTheGodfather/02LoveThemeFromTheGodfather.mp3',
@@ -64,13 +71,6 @@ export const TRACKS: Track[] = [
     //     position: 'top',
     //   },
     // ],
-  },
-  {
-    id: 2,
-    title: 'Pink Panther Theme Song',
-    artist: 'T. Schürger',
-    url: 'https://firebasestorage.googleapis.com/v0/b/ng-music-player-d4ce5.appspot.com/o/the-pink-panther-theme-song.mp3?alt=media&token=8e7fc080-3eaf-467f-a6b4-34fd7a96298b',
-    cover: 'https://i1.sndcdn.com/artworks-000193575970-i2owe2-t500x500.jpg',
   },
   {
     id: 3,
