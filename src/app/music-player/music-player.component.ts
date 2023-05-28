@@ -218,13 +218,6 @@ export class MusicPlayerComponent implements OnInit, OnDestroy {
     this.trackProgress$.next('0:00');
   }
 
-  private _didInputChange(c: SimpleChanges, inputName: string): boolean {
-    return (
-      c[inputName]?.firstChange ||
-      c[inputName]?.currentValue !== c[inputName]?.previousValue
-    );
-  }
-
   ngOnDestroy() {
     this.wave?.destroy();
     this._destroy$.next();
