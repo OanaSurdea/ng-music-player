@@ -6,14 +6,14 @@ export const TRACKS: Track[] = [
     id: 1,
     title: 'Pink Panther Theme Song',
     artist: 'Henry Mancini and His Orchestra',
-    url: 'https://ia904503.us.archive.org/23/items/lp_music-from-the-pink-panther-and-other-hits_living-guitars/disc1/01.01.%20The%20Pink%20Panther%20Theme.mp3',
+    url: '../assets/tracks/the-pink-panther-theme.mp3',
     cover: 'https://ia800109.us.archive.org/BookReader/BookReaderImages.php?zip=/0/items/cd_the-pink-panther-and-other-hits_henry-mancini-and-his-orchestra/cd_the-pink-panther-and-other-hits_henry-mancini-and-his-orchestra_jp2.zip&file=cd_the-pink-panther-and-other-hits_henry-mancini-and-his-orchestra_jp2/cd_the-pink-panther-and-other-hits_henry-mancini-and-his-orchestra_0000.jp2&id=cd_the-pink-panther-and-other-hits_henry-mancini-and-his-orchestra',
   },
   {
     id: 2,
     title: 'Godfather Theme 1',
     artist: 'Nino Rota',
-    url: 'https://ia800508.us.archive.org/15/items/LoveThemeFromTheGodfather/02LoveThemeFromTheGodfather.mp3',
+    url: '../assets/tracks/love-theme-from-the-godfather.mp3',
     cover: 'https://i.scdn.co/image/ab67616d0000b273532d6c2da59560659e672fdd',
     regions: [
       {
@@ -76,14 +76,14 @@ export const TRACKS: Track[] = [
     id: 3,
     title: 'Random Track Mashup',
     artist: 'T. Schürger',
-    url: 'https://wavesurfer-js.org/example/media/stereo.mp3',
+    url: '../assets/tracks/random-track-mashup..mp3',
     cover: 'https://f4.bcbits.com/img/a1723011251_10.jpg',
   },
   {
     id: 4,
-    title: 'Random Guitar',
+    title: 'Random Guitar Demo',
     artist: 'T. Schürger',
-    url: 'https://wavesurfer-js.org/example/media/demo.wav',
+    url: '../assets/tracks/random-guitar-demo.wav',
     cover:
       'https://swall.teahub.io/photos/small/288-2882748_black-acoustic-guitar-wallpaper-data-src-w-full.jpg',
   },
