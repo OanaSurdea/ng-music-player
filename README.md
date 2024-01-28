@@ -7,6 +7,13 @@
 
 <h3 align="center">A responsive and configurable Music Player library built with Angular & WaveSurfer.js</h3>
 
+<p align="center">
+  <a href="ng-music-player.netlify.app/"><strong>View Live Demo</strong></a>
+  <br>
+  <br>
+  <br>
+</p>
+
 <p>
   <img src="https://github.com/OanaSurdea/ng-music-player/assets/73647486/b5d6ad3d-99ac-4b6c-92a2-251f92bdb64b" width="49.5%" />
   <img src="https://github.com/OanaSurdea/ng-music-player/assets/73647486/e3705ab8-fca8-4f63-a2cd-211023677bbb" width="49.5%" />
