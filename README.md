@@ -1,4 +1,16 @@
-# NgSignalsMusicPlayer
+<p align="center">
+  <img src="https://raw.githubusercontent.com/angular/angular/main/aio/src/assets/images/logos/angular/angular_renaissance.png" alt="angular-logo" width="120px" height="120px"/>
+  <br>
+</p>
+
+<h1 align="center">NG Music Player</h1>
+
+<h3 align="center">A responsive and configurable Music Player library built with Angular & WaveSurfer.js</h3>
+
+<p>
+  <img src="https://github.com/OanaSurdea/ng-music-player/assets/73647486/b5d6ad3d-99ac-4b6c-92a2-251f92bdb64b" width="49.5%" />
+  <img src="https://github.com/OanaSurdea/ng-music-player/assets/73647486/e3705ab8-fca8-4f63-a2cd-211023677bbb" width="49.5%" />
+</p>
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.0.
 
