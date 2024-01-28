@@ -15,62 +15,62 @@ export const TRACKS: Track[] = [
     artist: 'Nino Rota',
     url: '../assets/media/audio/love-theme-from-the-godfather.mp3',
     cover: '../assets/media/images/love-theme-from-the-godfather-cover.jpeg',
-    regions: [
-      {
-        id: 'wavesurfer_vsrbqhq3t68',
-        color: 'rgba(2, 130, 202, 0.5)' || getRandomColor(0.5),
-        start: 47.5,
-        end: 78.5,
-        data: { note: 'Fantastic solo!' },
-        attributes: { label: 'abc', highlight: 'true', active: 'false' },
-        drag: false,
-        handleStyle: {
-          left: {
-            backgroundColor: 'rgba(0, 0, 0, 0)',
-          },
-          right: {
-            backgroundColor: 'rgba(0, 0, 0, 0)',
-          },
-        },
-      },
-      {
-        id: 'wavesurfer_82mtosart9',
-        color: 'rgba(36, 63, 181, 0.5)' || getRandomColor(0.5),
-        start: 126,
-        end: 140.1,
-        data: { note: 'Beautiful 🎉' },
-        attributes: { active: 'false' },
-        drag: false,
-        handleStyle: {
-          left: {
-            backgroundColor: 'rgba(0, 0, 0, 0)',
-          },
-          right: {
-            backgroundColor: 'rgba(0, 0, 0, 0)',
-          },
-        },
-      },
-    ],
-    markers: [
-      {
-        time: 94.2,
-        label: 'Clarinet Solo',
-        color: '#0075ff',
-        position: 'top',
-      },
-      {
-        time: 47.5,
-        label: 'Accordion Solo',
-        color: '#0075ff',
-        position: 'top',
-      },
-      {
-        time: 126,
-        label: 'Crescendo & Descrescendo',
-        color: '#0075ff',
-        position: 'top',
-      },
-    ],
+    // regions: [
+    //   {
+    //     id: 'wavesurfer_vsrbqhq3t68',
+    //     color: 'rgba(2, 130, 202, 0.5)' || getRandomColor(0.5),
+    //     start: 47.5,
+    //     end: 78.5,
+    //     data: { note: 'Fantastic solo!' },
+    //     attributes: { label: 'abc', highlight: 'true', active: 'false' },
+    //     drag: false,
+    //     handleStyle: {
+    //       left: {
+    //         backgroundColor: 'rgba(0, 0, 0, 0)',
+    //       },
+    //       right: {
+    //         backgroundColor: 'rgba(0, 0, 0, 0)',
+    //       },
+    //     },
+    //   },
+    //   {
+    //     id: 'wavesurfer_82mtosart9',
+    //     color: 'rgba(36, 63, 181, 0.5)' || getRandomColor(0.5),
+    //     start: 126,
+    //     end: 140.1,
+    //     data: { note: 'Beautiful 🎉' },
+    //     attributes: { active: 'false' },
+    //     drag: false,
+    //     handleStyle: {
+    //       left: {
+    //         backgroundColor: 'rgba(0, 0, 0, 0)',
+    //       },
+    //       right: {
+    //         backgroundColor: 'rgba(0, 0, 0, 0)',
+    //       },
+    //     },
+    //   },
+    // ],
+    // markers: [
+    //   {
+    //     time: 94.2,
+    //     label: 'Clarinet Solo',
+    //     color: '#0075ff',
+    //     position: 'top',
+    //   },
+    //   {
+    //     time: 47.5,
+    //     label: 'Accordion Solo',
+    //     color: '#0075ff',
+    //     position: 'top',
+    //   },
+    //   {
+    //     time: 126,
+    //     label: 'Crescendo & Descrescendo',
+    //     color: '#0075ff',
+    //     position: 'top',
+    //   },
+    // ],
   },
   {
     id: 3,
