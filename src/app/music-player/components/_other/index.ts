@@ -1,1 +1,9 @@
-export * from './loader/loader.component';
+/**
+ * NOTE: In order to quickly update this file
+ * you can press "Ctrl+Shift+P" then search for Generate Index
+ * or run "npm run index" in the terminal
+ */
+
+// @index(['./*/*.component.ts'], f => `export * from '${f.path}';`)
+export * from './loading-spinner/loading-spinner.component';
+// @endindex

@@ -1,19 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, InputSignal, Output, input } from '@angular/core';
 
 @Component({
   selector: 'app-resize-button',
+  standalone: true,
+  imports: [],
   templateUrl: './resize-button.component.html',
   styleUrls: ['./resize-button.component.scss'],
 })
-export class ResizeButtonComponent implements OnInit {
-  @Input() readonly isMinimized: boolean;
-  @Output() readonly onMinimize: EventEmitter<null> = new EventEmitter();
+export class ResizeButtonComponent {
 
-  constructor() {}
+  isMinimized: InputSignal<boolean> = input.required();
+  @Output() readonly onIsMinimizedChange: EventEmitter<void> = new EventEmitter();
 
-  ngOnInit() {}
-
-  toggleMinimize(): void {
-    this.onMinimize.emit();
-  }
 }

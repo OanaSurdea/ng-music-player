@@ -1,21 +1,26 @@
 <div class="m-1">
+  <!-- Music player -->
   <app-music-player
     [tracks]="tracks"
     [showComments]="true"
-    [showDarkMode]="showDarkMode$ | async"
+    [showDarkMode]="showDarkMode()"
   ></app-music-player>
 
   <div class="mt-3 d-flex justify-content-end me-2">
+    <!-- Dark mode toggle -->
     <div class="form-check form-switch">
       <input
+        id="dark-mode-toggle"
         class="form-check-input"
         type="checkbox"
-        [ngModel]="showDarkMode$ | async"
-        (ngModelChange)="showDarkMode$.next(!showDarkMode$.value)"
+        [ngModel]="showDarkMode()"
+        (ngModelChange)="showDarkMode.set(!showDarkMode())"
       />
-      
-      <label class="form-check-label">Toggle dark mode</label>
+
+      <label for="dark-mode-toggle" class="form-check-label">
+
+        Toggle dark mode
+      </label>
     </div>
   </div>
-
 </div>

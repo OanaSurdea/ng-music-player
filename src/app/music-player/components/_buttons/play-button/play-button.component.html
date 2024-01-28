@@ -1,9 +1,8 @@
 <button
   class="btn border-0"
-  [ngClass]="classes"
+  [ngClass]="classes()"
   type="button"
-  [title]="title"
-  (click)="onClick.emit()"
+  [title]="title()"
 >
-  <i class="pi pi-{{ icon }} text-muted"></i>
+  <i class="pi pi-{{ icon() }} text-muted"></i>
 </button>

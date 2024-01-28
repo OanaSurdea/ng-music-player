@@ -1,30 +1,18 @@
-import { Injectable, Input } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, WritableSignal, signal } from '@angular/core';
 import WaveSurfer from 'wavesurfer.js/src/wavesurfer';
-import { Track } from '../_types/interfaces';
+import { Track } from '../types/interfaces';
 
 @Injectable({ providedIn: 'root' })
 export class PlaylistService {
-  _playlist$: BehaviorSubject<Track[]> = new BehaviorSubject([]);
 
-  get playlist(): Track[] {
-    return this._playlist$.value;
-  }
+  playlist: WritableSignal<Track[]> = signal([]);
 
-  set playlist(value: Track[]) {
-    this._playlist$.next(value);
-  }
-
-  constructor() {}
-
-  playTrack(wave: WaveSurfer, track: Track) {
+  playTrack(wave: WaveSurfer, track: Track): void {
     if (!wave && !track) return;
-
-    if (wave && wave.isPlaying()) {
-      wave.stop();
-    }
+    if (wave && wave.isPlaying()) wave.stop();
 
     wave.load(track.url);
     wave.on('ready', () => wave.play());
   }
+
 }

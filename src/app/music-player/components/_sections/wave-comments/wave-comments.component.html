@@ -1,0 +1,19 @@
+<ng-container *ngIf="regions()?.length">
+  <div class="mt-3">
+    <h6 class="mb-2">Comments</h6>
+    <ul class="list-group shadow-sm">
+      <li
+        *ngFor="let region of regions()"
+        aria-disabled="true"
+        class="list-group-item"
+        [ngStyle]="{ borderLeft: '14px solid ' + region['color'] }"
+        (click)="onRegionCommentClick.emit(region)"
+        (keyup)="onRegionCommentClick.emit(region)"
+        [title]="isPlaying() ? '' : 'Play region'"
+      >
+        <span class="badge bg-primary badge-pill"> </span>
+        <span>{{ region?.data?.note }}</span>
+      </li>
+    </ul>
+  </div>
+</ng-container>

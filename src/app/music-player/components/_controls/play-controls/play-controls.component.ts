@@ -1,43 +1,22 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  HostListener,
-  Input,
-  Output,
-} from '@angular/core';
-import { PlayTypeEnum } from '../../../_types/enums';
+import { ChangeDetectionStrategy, Component, EventEmitter, InputSignal, Output, input } from '@angular/core';
+import { PlayTypeEnum } from '../../../types/enums';
+import { CommonModule } from '@angular/common';
+import { PlayButtonComponent } from '../../_buttons';
 
 @Component({
   selector: 'app-play-controls',
+  standalone: true,
+  imports: [CommonModule, PlayButtonComponent],
   templateUrl: './play-controls.component.html',
   styleUrls: ['./play-controls.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlayControlsComponent {
-  @Input() readonly isPlaying: boolean = false;
-  @Output() readonly onChange: EventEmitter<PlayTypeEnum> = new EventEmitter();
 
+  isPlaying: InputSignal<boolean> = input.required();
+  @Output() readonly onIsPlayingChange: EventEmitter<PlayTypeEnum> = new EventEmitter();
+
+  // Helpers
   playTypeEnum: typeof PlayTypeEnum = PlayTypeEnum;
 
-  @HostListener('document:keyup', ['$event']) onKeydownHandler(
-    event: KeyboardEvent
-  ) {
-    // event.stopPropagation();
-    // switch (event.code) {
-    //   case 'ArrowLeft':
-    //   case 'ArrowUp':
-    //     this.onChange.emit(PlayTypeEnum.PlayPrevious);
-    //     break;
-    //   case 'Enter':
-    //   case 'Space':
-    //     event.preventDefault();
-    //     this.onChange.emit(PlayTypeEnum.PlayPause);
-    //     break;
-    //   case 'ArrowRight':
-    //   case 'ArrowDown':
-    //     this.onChange.emit(PlayTypeEnum.PlayNext);
-    //     break;
-    // }
-  }
 }

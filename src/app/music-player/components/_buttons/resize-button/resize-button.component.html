@@ -1,18 +1,13 @@
 <div>
   <button
-    class="
-      btn btn--resize
-      border-0
-      text-muted
-      mb-1
-    "
+    class="btn btn--resize border-0 text-muted mb-1"
     type="button"
-    (click)="toggleMinimize()"
+    (click)="onIsMinimizedChange.emit()"
     title="Minimize"
   >
     <div class="row">
-      <i class="col-12 pi pi-arrow-{{ isMinimized ? 'up' : 'down' }}"></i>
-      <i class="col-12 pi pi-arrow-{{ isMinimized ? 'down' : 'up' }}"></i>
+      <i class="col-12 pi pi-arrow-{{ isMinimized() ? 'up' : 'down' }}"></i>
+      <i class="col-12 pi pi-arrow-{{ isMinimized() ? 'down' : 'up' }}"></i>
     </div>
   </button>
 </div>

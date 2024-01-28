@@ -3,7 +3,7 @@
     <app-play-button
       title="Play Previous"
       icon="step-backward-alt"
-      (click)="onChange.emit(playTypeEnum.PlayPrevious)"
+      (click)="onIsPlayingChange.emit(playTypeEnum.PlayPrevious)"
     ></app-play-button>
   </div>
 
@@ -11,8 +11,8 @@
     <app-play-button
       title="Play Next"
       classes="btn btn--play"
-      [icon]="isPlaying ? 'pause' : 'play'"
-      (click)="onChange.emit(playTypeEnum.PlayPause)"
+      [icon]="isPlaying() ? 'pause' : 'play'"
+      (click)="onIsPlayingChange.emit(playTypeEnum.PlayPause)"
     ></app-play-button>
   </div>
 
@@ -20,7 +20,7 @@
     <app-play-button
       title="Play Pause"
       icon="step-forward-alt"
-      (click)="onChange.emit(playTypeEnum.PlayNext)"
+      (click)="onIsPlayingChange.emit(playTypeEnum.PlayNext)"
     ></app-play-button>
   </div>
 </div>

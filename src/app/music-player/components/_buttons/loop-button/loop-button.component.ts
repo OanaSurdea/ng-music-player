@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -8,17 +9,15 @@ import {
 
 @Component({
   selector: 'app-loop-button',
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './loop-button.component.html',
   styleUrls: ['./loop-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoopButtonComponent {
-  @Input() readonly isLooping: boolean = false;
-  @Output() readonly onIsLoopingChange: EventEmitter<null> = new EventEmitter();
 
-  constructor() {}
+  @Input() isLooping: boolean = false;
+  @Output() readonly isLoopingChange: EventEmitter<boolean> = new EventEmitter();
 
-  isLoopingChange(): void {
-    this.onIsLoopingChange.emit();
-  }
 }

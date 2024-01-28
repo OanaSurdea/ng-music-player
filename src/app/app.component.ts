@@ -1,38 +1,34 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
-import { BehaviorSubject, Subject, takeUntil } from 'rxjs';
-import { Track } from './music-player/_types/interfaces';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit, Renderer2, WritableSignal, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { RouterOutlet } from '@angular/router';
+import { MusicPlayerComponent } from './music-player/music-player.component';
+import { Track } from './music-player/types/interfaces';
 import { TRACKS } from './tracks.data';
 
-type Theme = 'light' | 'dark';
-
 @Component({
-  selector: 'my-app',
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, CommonModule, FormsModule, MusicPlayerComponent],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
-  public tracks: Track[] = TRACKS;
-  showDarkMode$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  private _destroy$: Subject<void> = new Subject<void>();
+
+  tracks: Track[] = TRACKS;
+  selectedTrack: WritableSignal<Track> = signal(this.tracks[0]);
+  showDarkMode: WritableSignal<boolean> = signal(true);
 
   constructor(private renderer: Renderer2) {}
 
   ngOnInit(): void {
-    this._initTheme();
+    this._initThemeToggle();
   }
 
-  private _initTheme(): void {
-    this.showDarkMode$
-      .pipe(takeUntil(this._destroy$))
-      .subscribe((isDark: boolean) => {
-        const body: HTMLElement = document.body;
-        this.renderer.addClass(body, `theme--${isDark ? 'dark' : 'light'}`);
-        this.renderer.removeClass(body, `theme--${!isDark ? 'dark' : 'light'}`);
-      });
+  private _initThemeToggle(): void {
+    const body: HTMLElement = document.body;
+    this.renderer.addClass(body, `theme--${this.showDarkMode() ? 'dark' : 'light'}`);
+    this.renderer.removeClass(body, `theme--${!this.showDarkMode() ? 'dark' : 'light'}`);
   }
 
-  ngOnDestroy() {
-    this._destroy$.next();
-    this._destroy$.complete();
-  }
 }

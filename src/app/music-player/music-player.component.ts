@@ -1,226 +1,212 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
 import WaveSurfer from 'wavesurfer.js/src/wavesurfer.js';
-import {
-  Region,
-  RegionParams,
-} from 'wavesurfer.js/src/plugin/regions';
-import {
-  MarkerParams,
-} from 'wavesurfer.js/src/plugin/markers';
+import { Component, Input, InputSignal, OnDestroy, OnInit, WritableSignal, effect, input, signal } from '@angular/core';
+import { Region, RegionParams } from 'wavesurfer.js/src/plugin/regions';
+import { MarkerParams } from 'wavesurfer.js/src/plugin/markers';
 import { MusicPlayerService } from './services/music-player.service';
 import { convertToSeconds } from './helpers/convert-to-seconds.helper';
 import { PlaylistService } from './services/playlist.service';
 import { BehaviorSubject, Subject, takeUntil, distinctUntilChanged } from 'rxjs';
-import { Track } from './_types/interfaces';
-import { PlayTypeEnum } from './_types/enums';
+import { Track } from './types/interfaces';
+import { PlayTypeEnum } from './types/enums';
 import { fadeAnimation } from '../shared/animations';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { LoopButtonComponent, ResizeButtonComponent } from './components/_buttons';
+import { VolumeControlsComponent, PlayControlsComponent } from './components/_controls';
+import { PlaylistComponent } from './components/_sections/playlist/playlist.component';
+import { TrackComponent } from './components/_sections/track/track.component';
+import { WaveCommentsComponent } from './components/_sections/wave-comments/wave-comments.component';
 
 @Component({
   selector: 'app-music-player',
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+
+    // Controls
+    LoopButtonComponent,
+    VolumeControlsComponent,
+    PlayControlsComponent,
+
+    // Track
+    TrackComponent,
+
+    // Sections
+    PlaylistComponent,
+    WaveCommentsComponent,
+
+    // Other
+    ResizeButtonComponent,
+  ],
   templateUrl: './music-player.component.html',
   styleUrls: ['./music-player.component.scss'],
   animations: [fadeAnimation],
 })
 export class MusicPlayerComponent implements OnInit, OnDestroy {
-  // Selected Track
-  tracks$: BehaviorSubject<Track[]> = new BehaviorSubject(null);
-  selectedTrack$: BehaviorSubject<Track | null> = new BehaviorSubject(null);
 
-  showComments$: BehaviorSubject<boolean> = new BehaviorSubject(true);
-  showDarkMode$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  
+  // Tracks
   @Input() set tracks(value: Track[]) { this.tracks$.next(value); }
-  @Input() set selectedTrack(value: Track) { this.selectedTrack$.next(value); }
-  @Input() set showComments(value: boolean) { this.showComments$.next(value); }
-  @Input() set showDarkMode(value: boolean) { this.showDarkMode$.next(value); }
+  tracks$: BehaviorSubject<Track[]> = new BehaviorSubject(null);
+  selectedTrack: WritableSignal<Track> = signal(null);
+
+  // Preferences
+  @Input() isMinimized(value: boolean) { this.isMinimized$.next(value) }
+  isMinimized$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  showComments: InputSignal<boolean> = input(false);
+  showDarkMode: InputSignal<boolean> = input.required();
+  volume: InputSignal<number> = input(1.5);
 
   // Settings
-  trackProgress$: BehaviorSubject<string> = new BehaviorSubject('0:00');
-  trackDuration$: BehaviorSubject<string> = new BehaviorSubject('0:00');
-  volume$: BehaviorSubject<number> = new BehaviorSubject(0.5);
-
-  // Helpers
-  isMinimized$: BehaviorSubject<boolean> = new BehaviorSubject(false);
-  iterableRegions: Region[] = [];
+  trackProgress: WritableSignal<string> = signal('0:00');
+  trackDuration: WritableSignal<string> = signal('0:00');
 
   // WaveSurfer
   wave: WaveSurfer | null = null;
+  trackIterableRegions: WritableSignal<Region[]> = signal([]);
 
+  // Handlers
   private _destroy$: Subject<void> = new Subject<void>();
 
   constructor(
     private _musicPlayerService: MusicPlayerService,
     private _playlistService: PlaylistService,
-    private _cdRef: ChangeDetectorRef
-  ) {}
+  ) { }
+
+  // Hooks -------------------------------------------------------------------
 
   ngOnInit() {
-    this.showDarkMode$
-      .pipe(
-        distinctUntilChanged(),
-        takeUntil(this._destroy$)
-      )
-      .subscribe((value: boolean) => this.wave?.setWaveColor(value ? '#4f5963' : '#e0e0e0')
-      );
-
-    this.isMinimized$
-      .pipe(
-        distinctUntilChanged(),
-        takeUntil(this._destroy$)
-      )
-      .subscribe((_value: boolean) => this.wave?.setHeight(46));
-
-    this.tracks$
-      .pipe(
-        distinctUntilChanged(),
-        takeUntil(this._destroy$)
-      )
-      .subscribe(
-        (tracks: Track[]) => {
-          this._playlistService.playlist = tracks;
-          this.selectedTrack$.next(tracks[0]);
-          this._reloadTrack();
-          this._reloadWave();
-        }
-      );
-
-    this.selectedTrack$
-      .pipe(
-        distinctUntilChanged(),
-        takeUntil(this._destroy$)
-      )
-      .subscribe(
-        (_selectedTrack: Track) => {
-          this._reloadTrack();
-          this._reloadWave();
-        }
-      );
-  }
-
-  // Child Events
-  handleIsMuteChange(value: boolean) {
-    this.wave?.setMute(value);
-  }
-
-  handleVolumeChange(value: number) {
-    if (this.wave && value) {
-      this.volume$.next(value <= 0 ? 0 : value);
-      this.wave.setMute(this.volume$.value <= 0);
-      this.wave.setVolume(this.volume$.value);
-    }
-  }
-
-  handlePlay(type: PlayTypeEnum) {
-    const tracks = this.tracks$.value;
-    const currentIdx = tracks.indexOf(this.selectedTrack$.value);
-
-    switch (type) {
-      case PlayTypeEnum.PlayPrevious:
-        const lastIndex: number = tracks.length - 1;
-        const prevTrack: Track = tracks[currentIdx - 1] || tracks[lastIndex];
-        this.handleTrackChange(prevTrack);
-        break;
-
-      case PlayTypeEnum.PlayPause:
-        this.wave?.playPause();
-        break;
-
-      case PlayTypeEnum.PlayNext:
-        const nextTrack: Track = tracks[currentIdx + 1] || tracks[0];
-        this.handleTrackChange(nextTrack);
-        break;
-    }
-  }
-
-  handleTrackChange(track: Track) {
-    if (!this.wave || !track) return;
-
-    this.selectedTrack$.next(track);
-
-    this._reloadTrack();
-    this._reloadWave();
-
-    this.wave.on('ready', (e) => this.handlePlay(PlayTypeEnum.PlayPause));
-  }
-
-  handleMinimizeChange() {
-    this.isMinimized$.next(!this.isMinimized$.value);
-    setTimeout(() => this.wave?.drawBuffer(), 400);
-  }
-
-  handleRegionCommentClick(region: Region) {
-    if (this.wave) {
-      region.attributes.active = 'true';
-      this.wave.play(region.start, region.end);
-    }
-  }
-
-  // Inits
-  private _initWave(regions?: RegionParams[], markers?: MarkerParams[]): void {
-    this.wave = this._musicPlayerService.createWave(
-      regions,
-      markers,
-      this.showDarkMode$.value
-    );
-    this.iterableRegions = Object.values(this.wave?.regions?.list);
-    this._initWaveEventHandlers();
-  }
-
-  private _initWaveEventHandlers(): void {
-    // Region Events
-    this.wave?.on('region-click', (region: Region) => region.play());
-
-    this.wave?.on('region-click', (region: Region, event: Event) => {
-      event.stopPropagation();
-      region.attributes.active = 'true';
-      region.play();
-    });
-
-    // Progress events
-    this.wave.on('ready', (e) => {
-      this.trackDuration$.next(convertToSeconds(this.wave.getDuration()));
-      this.wave.setVolume(this.volume$.value);
-    });
-
-    this.wave.on('audioprocess', (ms: number) => {
-      this.trackProgress$.next(convertToSeconds(ms));
-      this._cdRef.detectChanges();
-    });
-
-    this.wave.on('seek', (ms: number) => {
-      this.trackProgress$.next(
-        convertToSeconds((ms *= this.wave.getDuration()))
-      );
-    });
-  }
-
-  private _reloadWave(): void {
-    const selectedTrack: Track | null = this.selectedTrack$.value;
-
-    if(!selectedTrack) return;
-
-    this.wave?.destroy();
-    this._initWave(selectedTrack.regions, selectedTrack.markers);
-    this.wave?.load(selectedTrack.url);
-  }
-
-  private _reloadTrack(): void {
-    const selectedTrack: Track | null = this.selectedTrack$.value;
-
-    this.selectedTrack$.next(selectedTrack);
-    this.trackProgress$.next('0:00');
+    this._watchInputChanges();
   }
 
   ngOnDestroy() {
     this.wave?.destroy();
     this._destroy$.next();
     this._destroy$.complete();
+    this._showDarkModeEffect.destroy();
   }
+
+  // Child Events
+  handleIsMutedChange(value: boolean) {
+    this.wave?.setMute(value);
+  }
+
+  handleVolumeChange(value: number) {
+    this.wave?.setMute(value === 0);
+    this.wave?.setVolume(value);
+  }
+
+  handlePlay(type: PlayTypeEnum) {
+    const tracks = this.tracks$.value;
+    const currentIdx = tracks.indexOf(this.selectedTrack());
+    const prevTrack: Track = tracks[currentIdx - 1] || tracks[tracks.length - 1];
+    const nextTrack: Track = tracks[currentIdx + 1] || tracks[0];
+
+    switch (type) {
+      case PlayTypeEnum.PlayPrevious:
+        return this.handleSelectedTrackChange(prevTrack);
+
+      case PlayTypeEnum.PlayPause:
+        return this.wave?.playPause();
+
+      case PlayTypeEnum.PlayNext:
+        return this.handleSelectedTrackChange(nextTrack);
+    }
+  }
+
+  handleSelectedTrackChange(track: Track) {
+    if (!this.wave || !track) return;
+
+    this.selectedTrack.set(track);
+    this._reloadWave();
+
+    this.wave.on('ready', () => this.handlePlay(PlayTypeEnum.PlayPause));
+  }
+
+  handleIsMinimizedChange() {
+    this.isMinimized$.next(!this.isMinimized$.value);
+    setTimeout(() => this.wave?.drawBuffer(), 400);
+  }
+
+  handleRegionCommentClick(region: RegionParams) {
+    if (!this.wave) return;
+
+    region.attributes.active = 'true';
+    this.wave.play(region.start, region.end);
+  }
+
+  // Inits -------------------------------------------------------------------
+
+  private _initWave(regions?: RegionParams[], markers?: MarkerParams[]): void {
+    this.wave = this._musicPlayerService.createWave(regions, markers, this.showDarkMode());
+    this.trackIterableRegions.set(Object.values(this.wave?.regions?.list));
+    this._initWaveEventHandlers();
+  }
+
+  private _initWaveEventHandlers(): void {
+    if (!this.wave) return;
+
+    // Region events
+    this.wave.on('region-click', (region: Region, event: Event) => {
+      event.stopPropagation();
+      region.attributes.active = 'true';
+      region.play();
+    });
+
+    // Progress events
+    this.wave.on('ready', () => {
+      this.trackDuration.set(convertToSeconds(this.wave.getDuration()));
+      this.wave.setVolume(this.volume());
+      this.wave.setMute(!this.volume());
+    });
+
+    this.wave.on('audioprocess', (ms: number) =>
+      this.trackProgress.set(convertToSeconds(ms))
+    );
+
+    this.wave.on('seek', (ms: number) =>
+      this.trackProgress.set(convertToSeconds((ms *= this.wave.getDuration())))
+    );
+  }
+
+  // Effects -----------------------------------------------------------------
+
+  private _showDarkModeEffect = effect(() =>
+    this.wave?.setWaveColor(this.showDarkMode() ? '#4f5963' : '#e0e0e0')
+  );
+
+  // Other -------------------------------------------------------------------
+
+  private _reloadWave(): void {
+    if (!this.selectedTrack()) return;
+    const { regions, markers, url } = this.selectedTrack();
+
+    this.trackProgress.set('0:00');
+    this.trackDuration.set('0:00');
+
+    this.wave?.destroy();
+    this._initWave(regions, markers);
+    this.wave?.load(url);
+  }
+
+  private _watchInputChanges(): void {
+    this.isMinimized$
+      .pipe(
+        distinctUntilChanged(),
+        takeUntil(this._destroy$)
+      )
+      .subscribe(() => this.wave?.setHeight(46));
+
+    this.tracks$
+      .pipe(
+        distinctUntilChanged(),
+        takeUntil(this._destroy$)
+      )
+      .subscribe((tracks: Track[]) => {
+        this._playlistService.playlist.set(tracks);
+        this.selectedTrack.set(tracks[0]);
+        this._reloadWave();
+      });
+  }
+
 }

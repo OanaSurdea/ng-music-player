@@ -1,0 +1,387 @@
+{
+  "version": "6.0",
+  "nxVersion": "17.2.8",
+  "deps": {
+    "@angular/animations": "^17.1.0",
+    "@angular/common": "^17.1.0",
+    "@angular/compiler": "^17.1.0",
+    "@angular/core": "^17.1.0",
+    "@angular/forms": "^17.1.0",
+    "@angular/platform-browser": "^17.1.0",
+    "@angular/platform-browser-dynamic": "^17.1.0",
+    "@angular/router": "^17.1.0",
+    "bootstrap": "^5.2.3",
+    "primeicons": "^6.0.1",
+    "rxjs": "~7.8.0",
+    "tslib": "^2.3.0",
+    "wavesurfer.js": "^6.6.4",
+    "zone.js": "~0.14.3",
+    "@angular-devkit/build-angular": "^17.1.0",
+    "@angular-eslint/builder": "17.2.1",
+    "@angular-eslint/eslint-plugin": "17.2.1",
+    "@angular-eslint/eslint-plugin-template": "17.2.1",
+    "@angular-eslint/schematics": "17.2.1",
+    "@angular-eslint/template-parser": "17.2.1",
+    "@angular/cli": "^17.1.0",
+    "@angular/compiler-cli": "^17.1.0",
+    "@types/jasmine": "~5.1.0",
+    "@types/wavesurfer.js": "^6.0.12",
+    "@typescript-eslint/eslint-plugin": "6.19.0",
+    "@typescript-eslint/parser": "6.19.0",
+    "eslint": "^8.56.0",
+    "jasmine-core": "~5.1.0",
+    "karma": "~6.4.0",
+    "karma-chrome-launcher": "~3.2.0",
+    "karma-coverage": "~2.2.0",
+    "karma-jasmine": "~5.1.0",
+    "karma-jasmine-html-reporter": "~2.1.0",
+    "typescript": "~5.3.2"
+  },
+  "pathMappings": {},
+  "nxJsonPlugins": [],
+  "fileMap": {
+    "projectFileMap": {},
+    "nonProjectFiles": [
+      {
+        "file": ".editorconfig",
+        "hash": "6686520031028425313"
+      },
+      {
+        "file": ".eslintrc.json",
+        "hash": "15166266246975242952"
+      },
+      {
+        "file": ".gitignore",
+        "hash": "13044518069027839699"
+      },
+      {
+        "file": ".vscode/extensions.json",
+        "hash": "5331566439708925252"
+      },
+      {
+        "file": ".vscode/launch.json",
+        "hash": "17038929134016848735"
+      },
+      {
+        "file": ".vscode/settings.json",
+        "hash": "17320682835409507004"
+      },
+      {
+        "file": ".vscode/tasks.json",
+        "hash": "5336636969995539451"
+      },
+      {
+        "file": "README.md",
+        "hash": "17031630429855279888"
+      },
+      {
+        "file": "angular.json",
+        "hash": "7160720440518386003"
+      },
+      {
+        "file": "package-lock.json",
+        "hash": "8588840756278833223"
+      },
+      {
+        "file": "package.json",
+        "hash": "3096950721335853220"
+      },
+      {
+        "file": "src/app/app.component.html",
+        "hash": "14362985645349719215"
+      },
+      {
+        "file": "src/app/app.component.scss",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "src/app/app.component.spec.ts",
+        "hash": "8518267172089269498"
+      },
+      {
+        "file": "src/app/app.component.ts",
+        "hash": "3786625419967106974"
+      },
+      {
+        "file": "src/app/app.config.ts",
+        "hash": "5428614352870646528"
+      },
+      {
+        "file": "src/app/app.routes.ts",
+        "hash": "12397496131277534773"
+      },
+      {
+        "file": "src/app/music-player/components/_buttons/index.ts",
+        "hash": "1737730225588880036"
+      },
+      {
+        "file": "src/app/music-player/components/_buttons/loop-button/loop-button.component.html",
+        "hash": "9740371683225894523"
+      },
+      {
+        "file": "src/app/music-player/components/_buttons/loop-button/loop-button.component.scss",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "src/app/music-player/components/_buttons/loop-button/loop-button.component.ts",
+        "hash": "15499953922937794722"
+      },
+      {
+        "file": "src/app/music-player/components/_buttons/play-button/play-button.component.html",
+        "hash": "16770070406052427416"
+      },
+      {
+        "file": "src/app/music-player/components/_buttons/play-button/play-button.component.scss",
+        "hash": "1008170806303573375"
+      },
+      {
+        "file": "src/app/music-player/components/_buttons/play-button/play-button.component.ts",
+        "hash": "11084544432964856864"
+      },
+      {
+        "file": "src/app/music-player/components/_buttons/resize-button/resize-button.component.html",
+        "hash": "17257699062406376024"
+      },
+      {
+        "file": "src/app/music-player/components/_buttons/resize-button/resize-button.component.scss",
+        "hash": "2795286535494345859"
+      },
+      {
+        "file": "src/app/music-player/components/_buttons/resize-button/resize-button.component.ts",
+        "hash": "6424274808694646581"
+      },
+      {
+        "file": "src/app/music-player/components/_controls/index.ts",
+        "hash": "10371504917424526406"
+      },
+      {
+        "file": "src/app/music-player/components/_controls/play-controls/play-controls.component.html",
+        "hash": "8357665100693883801"
+      },
+      {
+        "file": "src/app/music-player/components/_controls/play-controls/play-controls.component.scss",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "src/app/music-player/components/_controls/play-controls/play-controls.component.ts",
+        "hash": "14803601666475289547"
+      },
+      {
+        "file": "src/app/music-player/components/_controls/volume-controls/volume-controls.component.html",
+        "hash": "9324015223418872865"
+      },
+      {
+        "file": "src/app/music-player/components/_controls/volume-controls/volume-controls.component.scss",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "src/app/music-player/components/_controls/volume-controls/volume-controls.component.ts",
+        "hash": "12633622782612195838"
+      },
+      {
+        "file": "src/app/music-player/components/_other/index.ts",
+        "hash": "12054415736669727280"
+      },
+      {
+        "file": "src/app/music-player/components/_other/loading-spinner/loading-spinner.component.html",
+        "hash": "11485827796891910587"
+      },
+      {
+        "file": "src/app/music-player/components/_other/loading-spinner/loading-spinner.component.scss",
+        "hash": "4237197727201794449"
+      },
+      {
+        "file": "src/app/music-player/components/_other/loading-spinner/loading-spinner.component.ts",
+        "hash": "17441592114525620321"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/index.ts",
+        "hash": "12242864219560857845"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/playlist/playlist.component.html",
+        "hash": "11327874375703574172"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/playlist/playlist.component.scss",
+        "hash": "16383970662493633872"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/playlist/playlist.component.ts",
+        "hash": "9166082230622854820"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/track/components/index.ts",
+        "hash": "4640425041041322852"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/track/components/track-cover/track-cover.component.html",
+        "hash": "4689171158353127634"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/track/components/track-cover/track-cover.component.scss",
+        "hash": "3783628726064285784"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/track/components/track-cover/track-cover.component.ts",
+        "hash": "698527357894381897"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/track/components/track-time/track-time.component.html",
+        "hash": "1185200818832226305"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/track/components/track-time/track-time.component.scss",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/track/components/track-time/track-time.component.ts",
+        "hash": "7729701676265654000"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/track/components/track-title/track-title.component.html",
+        "hash": "13841976146522203755"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/track/components/track-title/track-title.component.scss",
+        "hash": "13115261980830457424"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/track/components/track-title/track-title.component.ts",
+        "hash": "12072576533376719458"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/track/track.component.html",
+        "hash": "3820600983638928148"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/track/track.component.scss",
+        "hash": "13239263454964676329"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/track/track.component.ts",
+        "hash": "4896263490353089595"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/wave-comments/wave-comments.component.html",
+        "hash": "9426408590298266704"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/wave-comments/wave-comments.component.scss",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "src/app/music-player/components/_sections/wave-comments/wave-comments.component.ts",
+        "hash": "15832048195792613494"
+      },
+      {
+        "file": "src/app/music-player/helpers/convert-to-seconds.helper.ts",
+        "hash": "2241212796018969277"
+      },
+      {
+        "file": "src/app/music-player/helpers/get-random-color.helper.ts",
+        "hash": "12898253573717351876"
+      },
+      {
+        "file": "src/app/music-player/helpers/index.ts",
+        "hash": "16047778987214519030"
+      },
+      {
+        "file": "src/app/music-player/music-player.component.html",
+        "hash": "14927035463250776368"
+      },
+      {
+        "file": "src/app/music-player/music-player.component.scss",
+        "hash": "17079232104380456142"
+      },
+      {
+        "file": "src/app/music-player/music-player.component.ts",
+        "hash": "12321211770680891086"
+      },
+      {
+        "file": "src/app/music-player/services/music-player.service.ts",
+        "hash": "4264266580123874182"
+      },
+      {
+        "file": "src/app/music-player/services/playlist.service.ts",
+        "hash": "16361416069119759050"
+      },
+      {
+        "file": "src/app/music-player/types/enums/index.ts",
+        "hash": "12661521948159130327"
+      },
+      {
+        "file": "src/app/music-player/types/enums/play-type.enum.ts",
+        "hash": "420394872739023678"
+      },
+      {
+        "file": "src/app/music-player/types/interfaces/index.ts",
+        "hash": "16524224344029627043"
+      },
+      {
+        "file": "src/app/music-player/types/interfaces/track.interface.ts",
+        "hash": "13320391787794022981"
+      },
+      {
+        "file": "src/app/shared/animations/fade.animation.ts",
+        "hash": "2359924770674887270"
+      },
+      {
+        "file": "src/app/shared/animations/index.ts",
+        "hash": "6697413903535222470"
+      },
+      {
+        "file": "src/app/tracks.data.ts",
+        "hash": "4862269280502773528"
+      },
+      {
+        "file": "src/assets/.gitkeep",
+        "hash": "3244421341483603138"
+      },
+      {
+        "file": "src/favicon.ico",
+        "hash": "3988961587069885523"
+      },
+      {
+        "file": "src/index.html",
+        "hash": "15113213395677966717"
+      },
+      {
+        "file": "src/main.ts",
+        "hash": "4927504514031276065"
+      },
+      {
+        "file": "src/styles.scss",
+        "hash": "349757716490614713"
+      },
+      {
+        "file": "src/styles/_bootstrap-overrides.scss",
+        "hash": "648809038399232025"
+      },
+      {
+        "file": "src/styles/_browser-overrides.scss",
+        "hash": "5424020119236493903"
+      },
+      {
+        "file": "src/styles/_button.scss",
+        "hash": "832007939287436717"
+      },
+      {
+        "file": "src/styles/main.scss",
+        "hash": "13993615837870284835"
+      },
+      {
+        "file": "tsconfig.app.json",
+        "hash": "17337579397915052279"
+      },
+      {
+        "file": "tsconfig.json",
+        "hash": "4634225402595663945"
+      },
+      {
+        "file": "tsconfig.spec.json",
+        "hash": "15575553540147145788"
+      }
+    ]
+  }
+}

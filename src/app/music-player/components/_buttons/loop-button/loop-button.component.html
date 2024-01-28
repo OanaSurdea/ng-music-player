@@ -2,7 +2,7 @@
   <button
     class="btn btn-light-outline"
     type="button"
-    (click)="isLoopingChange()"
+    (click)="isLoopingChange.emit(!this.isLooping)"
     [title]="isLooping ? 'Disable loop' : 'Enable loop'"
     [class.active]="isLooping"
   >

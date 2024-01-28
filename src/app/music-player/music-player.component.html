@@ -2,30 +2,30 @@
 <div
   class="music-player shadow-sm"
   [class.music-player--small]="isMinimized$ | async"
-  [class.music-player--dark]="showDarkMode$ | async"
+  [class.music-player--dark]="showDarkMode()"
 >
   <div class="music-player__row row align-items-center">
     <!-- Track -->
     <app-track
       class="col-12 col-sm-12 col-md"
-      [selectedTrack$]="selectedTrack$"
-      [currentTime]="trackProgress$ | async"
-      [duration]="trackDuration$ | async"
+      [selectedTrack]="selectedTrack()"
+      [currentTime]="trackProgress()"
+      [duration]="trackDuration()"
       [isLoading]="!wave?.isReady"
     >
       <!-- Controls -->
       <div class="music-player__controls my-4 my-sm-0">
         <app-play-controls
           [isPlaying]="wave?.isPlaying()"
-          (onChange)="handlePlay($event)"
+          (onIsPlayingChange)="handlePlay($event)"
         ></app-play-controls>
 
         <app-volume-controls
           class="d-none d-sm-block ps-sm-2 ps-lg-4"
           [isMuted]="wave?.isMuted"
-          [volume]="volume$ | async"
+          [volume]="wave?.getVolume()"
           (onVolumeChange)="handleVolumeChange($event)"
-          (onIsMuteChange)="handleIsMuteChange($event)"
+          (onIsMutedChange)="handleIsMutedChange($event)"
         ></app-volume-controls>
       </div>
     </app-track>
@@ -33,28 +33,28 @@
     <app-resize-button
       class="col-auto d-none d-md-block pe-sm-3"
       [isMinimized]="isMinimized$ | async"
-      (onMinimize)="handleMinimizeChange()"
+      (onIsMinimizedChange)="handleIsMinimizedChange()"
     ></app-resize-button>
   </div>
 
-  <!-- Playlist -->
-  <ng-container *ngIf="!(isMinimized$ | async)">
+  <!-- Playlist section -->
+  <ng-container *ngIf="(isMinimized$ | async) === false">
     <div class="music-player__row music-player__row--last row">
       <app-playlist
         class="col-12"
-        [selectedTrack]="selectedTrack$ | async"
+        [selectedTrack]="selectedTrack()"
         [tracks]="tracks$ | async"
-        (onTrackChange)="handleTrackChange($event)"
+        (onSelectedTrackChange)="handleSelectedTrackChange($event)"
       ></app-playlist>
     </div>
   </ng-container>
 </div>
 
-<!-- Track section comments -->
-<ng-container *ngIf="showComments$ | async">
-  <app-waveform-comments
-    [regions]="iterableRegions"
+<!-- Comments section -->
+<ng-container *ngIf="showComments()">
+  <app-wave-comments
     [isPlaying]="wave?.isPlaying()"
+    [regions]="trackIterableRegions()"
     (onRegionCommentClick)="handleRegionCommentClick($event)"
-  ></app-waveform-comments>
+  ></app-wave-comments>
 </ng-container>

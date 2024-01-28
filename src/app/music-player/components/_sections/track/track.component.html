@@ -1,0 +1,41 @@
+<div class="track row align-items-center">
+  <div class="col-12 col-sm-6 col-md-auto">
+    <!-- Track Cover & Title -->
+    <div class="row align-items-center">
+      <app-track-cover
+        class="col-12 col-sm-auto"
+        [imageUrl]="selectedTrack()?.cover"
+      ></app-track-cover>
+
+      <app-track-title
+        class="col-12 col-sm text-center text-sm-start ps-0 ps-md-1"
+        [title]="selectedTrack()?.title"
+        [artist]="selectedTrack()?.artist"
+      ></app-track-title>
+    </div>
+  </div>
+
+  <!-- Music Player Controls -->
+  <div class="col-12 col-sm-6 col-md-auto pe-sm-2 pe-md-2 order-2 order-sm-1">
+    <ng-content></ng-content>
+  </div>
+
+  <!-- Track Wave & Timestamps -->
+  <div class="track__wave-details col order-1 order-sm-2">
+    <div class="row align-items-center">
+      <div class="col-auto">
+        <app-track-time *ngIf="!isLoading()" [time]="currentTime()"></app-track-time>
+      </div>
+
+      <div class="track__wave col px-0">
+        <app-loading-spinner [isLoading]="isLoading()"></app-loading-spinner>
+
+        <div id="waveform"></div>
+      </div>
+
+      <div class="col-auto ps-2">
+        <app-track-time *ngIf="!isLoading()"  [time]="duration()"></app-track-time>
+      </div>
+    </div>
+  </div>
+</div>

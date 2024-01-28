@@ -1,23 +1,13 @@
 import { Injectable } from '@angular/core';
-
-import TimelinePlugin from 'wavesurfer.js/src/plugin/timeline';
 import CursorPlugin from 'wavesurfer.js/src/plugin/cursor';
-import RegionsPlugin, {
-  RegionParams,
-  RegionsPluginParams,
-} from 'wavesurfer.js/src/plugin/regions';
-import MarkersPlugin, {
-  MarkerParams,
-  MarkersPluginParams,
-} from 'wavesurfer.js/src/plugin/markers';
-import WaveSurfer = require('wavesurfer.js');
+import RegionsPlugin, { RegionParams } from 'wavesurfer.js/src/plugin/regions';
+import MarkersPlugin, { MarkerParams } from 'wavesurfer.js/src/plugin/markers';
+import WaveSurfer from 'wavesurfer.js';
 import { convertToSeconds } from '../helpers';
 
 @Injectable({ providedIn: 'root' })
 export class MusicPlayerService {
   public wave: WaveSurfer | null = null;
-
-  constructor() {}
 
   public createWave(
     regions?: RegionParams[],
@@ -42,9 +32,6 @@ export class MusicPlayerService {
       pixelRatio: 10,
       splitChannels: false,
       closeAudioContext: true,
-      // barHeight: 1.5,
-      // barMinHeight: 150,
-      // normalize: true,
 
       // Plugins
       plugins: [
