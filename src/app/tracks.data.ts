@@ -76,7 +76,7 @@ export const TRACKS: Track[] = [
     id: 3,
     title: 'Random Track Mashup',
     artist: 'T. Schürger',
-    url: '../assets/media/audio/random-track-mashup..mp3',
+    url: '../assets/media/audio/random-track-mashup.mp3',
     cover: '../assets/media/images/random-track-mashup-cover.jpeg',
   },
   {
